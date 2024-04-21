@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Backend\AdminController;
+use App\Http\Controllers\Backend\AdminProfileController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,10 +24,18 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
 
-require __DIR__.'/auth.php';
+Route::group(
+    ['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'],
+    function () {
+        Route::get('dashboard', [AdminController::class, 'dashboard'])
+            ->name('dashboard');
+        //profile routes==========================================================================================
+        Route::get('profile', [AdminProfileController::class, 'index'])->name('profile');
+        Route::post('profile/update', [AdminProfileController::class, 'profileUpdate'])->name('profile.update');
+        Route::post('profile/update/password', [AdminProfileController::class, 'passwordUpdate'])->name('password.update');
+    }
+);
+
+require __DIR__ . '/auth.php';
+require __DIR__ . '/adminAuth.php';
