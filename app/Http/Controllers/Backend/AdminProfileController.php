@@ -23,7 +23,7 @@ class AdminProfileController extends Controller
 
         $request->validate([
             'name' => ['required', 'max:100'],
-            'email' => ['required', 'email', 'unique:admins,email,' . Auth::guard('web')->user()->id],
+            'email' => ['required', 'email', 'unique:users,email,' . Auth::guard('web')->user()->id],
             'image' => ['image', 'max:2048']
         ]);
 
@@ -36,7 +36,7 @@ class AdminProfileController extends Controller
         if ($request->hasFile('image')) {
             $profileData['image'] = $newImage;
         }
-        Admin::where('id', Auth::guard('web')->user()->id)->update($profileData);
+        User::where('id', Auth::guard('web')->user()->id)->update($profileData);
         if ($oldImage && $newImage) {
             Storage::disk('myDisk')->delete($oldImage);
         }
@@ -54,10 +54,10 @@ class AdminProfileController extends Controller
         ]);
 
         $userId = Auth::guard('web')->user()->id;
-        $password = Admin::where('id', $userId)->first()->password;
+        $password = User::where('id', $userId)->first()->password;
 
         if (Hash::check($request->current_password, $password)) {
-            $request->user('admin')->update([
+            $request->user('web')->update([
                 'password' => bcrypt($request->password)
             ]);
         } else {

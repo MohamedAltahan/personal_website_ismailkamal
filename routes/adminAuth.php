@@ -27,7 +27,7 @@ Route::group(['middleware' => 'guest', 'prefix' => 'admin', 'as' => 'admin.'], f
         ->name('password.store');
 });
 
-Route::group(['middleware' => 'admin', 'prefix' => 'admin', 'as' => 'admin.'], function () {
+Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.'], function () {
 
     Route::get('confirm-password', [ConfirmablePasswordController::class, 'show'])
         ->name('password.confirm');
