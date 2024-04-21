@@ -13,13 +13,15 @@ use Illuminate\Http\Request;
 class SettingController extends Controller
 {
     use fileUploadTrait;
+    //________________________________________________________________
     public function index()
     {
-
-        return view('admin.setting.index');
+        $setting = Setting::first();
+        $logoSetting = LogoSetting::first();
+        return view('admin.setting.index', compact('setting', 'logoSetting'));
     }
 
-    //===============================================================
+    //__________________________________________________________________
     public function generalSettingUpdate(Request $request)
     {
         $request->validate([
@@ -32,12 +34,9 @@ class SettingController extends Controller
         Setting::updateOrCreate(['id' => 1], $request->all());
         toastr('Updated successfully', 'success', 'success');
         return redirect()->back();
-        // return view('admin.setting.index');
     }
 
-
-
-    //================================================================
+    //________________________________________________________________
     function logoSettingUpdate(Request $request)
     {
         $request->validate([
@@ -63,24 +62,6 @@ class SettingController extends Controller
             $logos
         );
         toastr('Updated successfully', 'success', 'success');
-        return redirect()->back();
-    }
-    /** Pusher settings update ====================================================================*/
-    function pusherSettingUpdate(Request $request)
-    {
-        $validatedData = $request->validate([
-            'pusher_app_id' => ['required'],
-            'pusher_key' => ['required'],
-            'pusher_secret' => ['required'],
-            'pusher_cluster' => ['required'],
-        ]);
-
-        PusherSetting::updateOrCreate(
-            ['id' => 1],
-            $validatedData
-        );
-
-        toastr('Updated successfully!', 'success', 'success');
         return redirect()->back();
     }
 }
