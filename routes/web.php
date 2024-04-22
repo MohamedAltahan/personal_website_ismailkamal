@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Backend\AboutController;
 use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\AdminProfileController;
 use App\Http\Controllers\Backend\CategoryController;
@@ -51,6 +52,10 @@ Route::group(
         //sub category routes_______________________________________________________________________________________
         Route::put('sub-category/change-status', [SubCategoryController::class, 'changeStatus'])->name('sub-category.change-status');
         Route::resource('sub-category', SubCategoryController::class);
+
+        //About______________________________________________________________________________
+        Route::get('about', [AboutController::class, 'index'])->name('about.index');
+        Route::put('about/update', [AboutController::class, 'update'])->name('about.update');
     }
 );
 
