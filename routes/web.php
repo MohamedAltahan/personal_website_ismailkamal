@@ -4,9 +4,14 @@ use App\Http\Controllers\Backend\AboutController;
 use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\AdminProfileController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\DesignController;
 use App\Http\Controllers\Backend\SettingController;
+
 use App\Http\Controllers\Backend\SubCategoryController;
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Backend\ShowDesign;
+use App\Http\Controllers\Backend\ShowDesignController;
+use App\Models\Category;
+use App\Models\SubCategory;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -56,6 +61,18 @@ Route::group(
         //About______________________________________________________________________________
         Route::get('about', [AboutController::class, 'index'])->name('about.index');
         Route::put('about/update', [AboutController::class, 'update'])->name('about.update');
+
+        //desgin _____________________________________________________________________________
+        Route::delete('design/delete-design-video', [DesignController::class, 'deleteDesignVideo'])->name('design.delete-design-video');
+        Route::delete('design/delete-design-image', [DesignController::class, 'deleteDesignImage'])->name('design.delete-design-image');
+        Route::put('design/change-status', [DesignController::class, 'changeStatus'])->name('design.change-status');
+        Route::resource('design', DesignController::class);
+
+        //show desgins page____________________________________________________________________
+        Route::get('show-designs', [ShowDesignController::class, 'index'])->name('show-designs.index');
+
+        //child category routes_____________________________________________________________________________________
+        Route::get('get-sub-categories', [SubCategoryController::class, 'getSubCategories'])->name('get-sub-categories');
     }
 );
 

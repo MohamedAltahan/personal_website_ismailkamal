@@ -96,14 +96,15 @@ class SubCategoryController extends Controller
             return response(['status' => 'error', 'message' => 'Can not delete, the item not found.']);
         }
 
-        $ChildCategoryCount = ChildCategory::where('sub_category_id', $id)->count();
-        if ($ChildCategoryCount > 0) {
-            return response(['status' => 'error', 'message' => 'Can not delete, this sub category has child categories.']);
-        }
-
         $subCategory->delete();
         toastr('Deleted Successfully');
         return response(['status' => 'success', 'message' => 'Deleted sucessfully']);
+    }
+
+    //get sub categories-----------------------------------------------------
+    public function getSubCategories(Request $request)
+    {
+        return  SubCategory::where('category_id', $request->id)->get();
     }
 
     //change status using ajax request--------------------------------------------------
