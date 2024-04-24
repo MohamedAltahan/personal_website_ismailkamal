@@ -23,7 +23,8 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
         <!-- Libraries Stylesheet -->
-        <link href="{{ asset('frontend') }}/lib/animate/animate.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="{{ asset('') }}">
+        <link rel="stylesheet" href="{{ asset('frontend/lib/animate/animate.min.css') }}">
         <link href="{{ asset('frontend') }}/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
         <link href="{{ asset('frontend') }}/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
 
