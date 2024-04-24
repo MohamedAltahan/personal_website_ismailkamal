@@ -7,8 +7,8 @@
         <ul class="sidebar-menu">
             {{-- ********************************Dashboard**************************************** --}}
             <li class="menu-header" style="color: black">Eamils</li>
-            <li class="dropdown {{ setActive(['admin.dashboard*']) }}">
-                <a href="{{ route('admin.dashboard') }}" class="nav-link "><i
+            <li class="dropdown {{ setActive(['admin.get-emails.*']) }}">
+                <a href="{{ route('admin.get-emails.index') }}" class="nav-link "><i
                         class="fas fa-envelope"></i><span>Email(inbox)</span></a>
             </li>
 

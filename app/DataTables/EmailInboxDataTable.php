@@ -14,6 +14,8 @@ use Yajra\DataTables\Services\DataTable;
 
 class EmailInboxDataTable extends DataTable
 {
+    public $counter = 0;
+
     /**
      * Build the DataTable class.
      *
@@ -21,8 +23,19 @@ class EmailInboxDataTable extends DataTable
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
+
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'emailinbox.action')
+            ->addColumn('id', function () {
+                return ++$this->counter;
+            })
+            ->addColumn('Received_at', function ($query) {
+                return $query->created_at;
+            })
+            ->addColumn('action', function ($query) {
+                $openBtn = "<a href='" . route('admin.get-emails.show', $query->id) . "'class='btn btn-sm btn-primary'><i class='far fa-edit'></i>Open</a>";
+                return $openBtn;
+            })
+            ->rawColumns(['action'])
             ->setRowId('id');
     }
 
@@ -31,7 +44,7 @@ class EmailInboxDataTable extends DataTable
      */
     public function query(EmailInbox $model): QueryBuilder
     {
-        return $model->newQuery();
+        return $model->orderBy('id', 'ASC')->newQuery();
     }
 
     /**
@@ -40,20 +53,20 @@ class EmailInboxDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-                    ->setTableId('emailinbox-table')
-                    ->columns($this->getColumns())
-                    ->minifiedAjax()
-                    //->dom('Bfrtip')
-                    ->orderBy(1)
-                    ->selectStyleSingle()
-                    ->buttons([
-                        Button::make('excel'),
-                        Button::make('csv'),
-                        Button::make('pdf'),
-                        Button::make('print'),
-                        Button::make('reset'),
-                        Button::make('reload')
-                    ]);
+            ->setTableId('emailinbox-table')
+            ->columns($this->getColumns())
+            ->minifiedAjax()
+            //->dom('Bfrtip')
+            ->orderBy(1)
+            ->selectStyleSingle()
+            ->buttons([
+                Button::make('excel'),
+                Button::make('csv'),
+                Button::make('pdf'),
+                Button::make('print'),
+                Button::make('reset'),
+                Button::make('reload')
+            ]);
     }
 
     /**
@@ -62,15 +75,15 @@ class EmailInboxDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(60)
-                  ->addClass('text-center'),
             Column::make('id'),
-            Column::make('add your columns'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
+            Column::make('message'),
+            Column::make('Received_at'),
+            Column::computed('action')
+                ->exportable(false)
+                ->printable(false)
+                ->width(200)
+                ->addClass('text-center'),
+
         ];
     }
 
