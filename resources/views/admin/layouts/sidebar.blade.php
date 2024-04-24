@@ -5,7 +5,7 @@
         </div>
 
         <ul class="sidebar-menu">
-            {{-- ********************************Dashboard**************************************** --}}
+            {{-- ___________________________Dashboard__________________________________________ --}}
             <li class="menu-header" style="color: black">Eamils</li>
             <li class="dropdown {{ setActive(['admin.get-emails.*']) }}">
                 <a href="{{ route('admin.get-emails.index') }}" class="nav-link "><i
@@ -13,9 +13,9 @@
             </li>
 
 
-            {{-- *********************************Setting******************************************* --}}
+            {{-- ___________________________setting__________________________________________________ --}}
             <li class="menu-header" style="color: black"> </i> Settings</li>
-            {{-- settings---------------------------------------------------------------- --}}
+            {{-- settings____________________________________________________________________________ --}}
             <li class="{{ setActive(['admin.settings.*']) }}"><a href="{{ route('admin.settings.index') }}"
                     class="nav-link "><i class="fas fa-wrench"></i><span>General Settings</span></a></li>
 
@@ -27,6 +27,8 @@
 
             <li class="{{ setActive(['admin.show-designs.*']) }}"><a href="{{ route('admin.show-designs.index') }}"
                     class="nav-link "><i class="fas fa-pen-fancy"></i><span>Designs</span></a></li>
+            <li class="{{ setActive(['admin.socials.*']) }}"><a href="{{ route('admin.socials.index') }}"
+                    class="nav-link "><i class="fab fa-facebook-square"></i><span>Social buttons</span></a></li>
         </ul>
 
         <br>

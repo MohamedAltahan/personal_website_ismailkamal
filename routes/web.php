@@ -6,13 +6,11 @@ use App\Http\Controllers\Backend\AdminProfileController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\DesignController;
 use App\Http\Controllers\Backend\SettingController;
-
 use App\Http\Controllers\Backend\SubCategoryController;
-use App\Http\Controllers\Backend\ShowDesign;
 use App\Http\Controllers\Backend\ShowDesignController;
-use App\Http\Controllers\EmailInboxController;
-use App\Models\Category;
-use App\Models\SubCategory;
+use App\Http\Controllers\Backend\EmailInboxController;
+use App\Http\Controllers\Backend\SocialController;
+use App\Http\Controllers\Frontend\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -78,7 +76,14 @@ Route::group(
         //email inbox_____________________________________________________________________________________________
         Route::get('email-inbox', [EmailInboxController::class, 'index'])->name('get-emails.index');
         Route::get('email-inbox/show/{id}', [EmailInboxController::class, 'show'])->name('get-emails.show');
+
+        //footer social buttons---------------------------
+        Route::put('socials/change-status', [SocialController::class, 'changeStatus'])->name('socials.change-status');
+        Route::resource('socials', SocialController::class);
     }
 );
 
+Route::controller(HomeController::class, 'index')->group(function () {
+    Route::get('/', 'index')->name('home');
+});
 require __DIR__ . '/adminAuth.php';
