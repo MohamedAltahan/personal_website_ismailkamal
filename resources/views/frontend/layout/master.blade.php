@@ -8,7 +8,7 @@
         <meta content="" name="keywords">
         <meta content="" name="description">
 
-        <!-- Favicon -->
+
         <link href="{{ asset('frontend') }}/img/favicon.ico" rel="icon">
 
         <!-- Google Web Fonts -->
