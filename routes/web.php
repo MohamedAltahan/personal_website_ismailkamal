@@ -70,7 +70,7 @@ Route::group(
         //show desgins page____________________________________________________________________________________
         Route::get('show-designs', [ShowDesignController::class, 'index'])->name('show-designs.index');
 
-        //sub category routes_____________________________________________________________________________________
+        //sub category routes _____________________________________________________________________________________
         Route::get('get-sub-categories', [SubCategoryController::class, 'getSubCategories'])->name('get-sub-categories');
 
         //email inbox_____________________________________________________________________________________________
