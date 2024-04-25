@@ -25,12 +25,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
-
-
 Route::group(
     ['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'],
     function () {
@@ -83,5 +77,6 @@ Route::group(
 
 Route::controller(HomeController::class, 'index')->group(function () {
     Route::get('/', 'index')->name('home');
+    Route::get('contact', 'contact')->name('contact');
 });
 require __DIR__ . '/adminAuth.php';
