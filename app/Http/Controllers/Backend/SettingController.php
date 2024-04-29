@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\About;
 use App\Models\EmailConfiguration;
+use App\Models\HomePageSetting;
 use App\Models\LogoSetting;
 use App\Models\PusherSetting;
 use App\Models\Setting;
@@ -18,7 +20,9 @@ class SettingController extends Controller
     {
         $setting = Setting::first();
         $logoSetting = LogoSetting::first();
-        return view('admin.setting.index', compact('setting', 'logoSetting'));
+        $content = About::first();
+        $homePage = HomePageSetting::first();
+        return view('admin.setting.index', compact('setting', 'logoSetting', 'content', 'homePage'));
     }
 
     //__________________________________________________________________
@@ -36,6 +40,7 @@ class SettingController extends Controller
         return redirect()->back();
     }
 
+
     //________________________________________________________________
     function logoSettingUpdate(Request $request)
     {
@@ -43,6 +48,7 @@ class SettingController extends Controller
             'main_logo' => ['image', 'max:3000'],
             'icon' => ['image', 'max:3000'],
         ]);
+
         $oldLogos = LogoSetting::first() ?: new LogoSetting();
 
         $logos = [];
@@ -58,7 +64,7 @@ class SettingController extends Controller
         }
 
         LogoSetting::updateOrCreate(
-            ['id' => 1],
+            ['id' => $oldLogos->id ?? 1],
             $logos
         );
         toastr('Updated successfully', 'success', 'success');

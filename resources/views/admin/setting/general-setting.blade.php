@@ -10,18 +10,18 @@
                 </div>
 
                 <div class="form-group">
-                    <x-form.input class="form-control" name="contact_email"
-                        label='Contact Email (appear in contact page)' value="{{ @$setting->contact_email }}" />
+                    <x-form.input class="form-control" name="contact_email" label='Contact Email'
+                        value="{{ @$setting->contact_email }}" />
                 </div>
 
                 <div class="form-group">
-                    <x-form.input class="form-control" name="contact_phone"
-                        label='Contact phone (appear in contact page)' value="{{ @$setting->contact_phone }}" />
+                    <x-form.input class="form-control" name="contact_phone" label='Contact phone'
+                        value="{{ @$setting->contact_phone }}" />
                 </div>
 
                 <div class="form-group">
-                    <x-form.input class="form-control" name="contact_address"
-                        label='Contact address (appear in contact page)' value="{{ @$setting->contact_address }}" />
+                    <x-form.input class="form-control" name="contact_address" label='Contact address'
+                        value="{{ @$setting->contact_address }}" />
                 </div>
 
                 <button type="submit" class="btn btn-primary">Update</button>

@@ -32,6 +32,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $request->validate([
             'icon' => ['required', 'not_in:empty'],
             'name' => ['required', 'max:200', 'unique:categories,name'],

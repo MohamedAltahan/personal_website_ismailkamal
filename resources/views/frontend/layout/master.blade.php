@@ -2,15 +2,21 @@
 <html lang="en">
 
     <head>
+
+        @php
+            $setting = \App\Models\Setting::first();
+            $categories = \App\Models\Category::where('status', 'active')->get();
+            $socials = \App\Models\Social::where('status', 'active')->get();
+            $logo = \App\Models\LogoSetting::first();
+        @endphp
         <meta charset="utf-8">
-        <title>@yield('title')</title>
+        <title>@yield('title', $setting->site_name)</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="" name="keywords">
         <meta content="" name="description">
 
 
-        <link href="{{ asset('frontend') }}/img/favicon.ico" rel="icon">
-
+        <link href="{{ asset('uploads/' . $logo->icon) }}" rel="icon">
         <!-- Google Web Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,7 +29,6 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
         <!-- Libraries Stylesheet -->
-        <link rel="stylesheet" href="{{ asset('') }}">
         <link rel="stylesheet" href="{{ asset('frontend/lib/animate/animate.min.css') }}">
         <link href="{{ asset('frontend') }}/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
         <link href="{{ asset('frontend') }}/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
@@ -33,10 +38,13 @@
 
         <!-- Template Stylesheet -->
         <link href="{{ asset('frontend') }}/css/style.css" rel="stylesheet">
+        {{-- toastr --}}
+        {{-- <link rel="stylesheet" href="{{ asset('backend/assets/css/toastr.min.css') }}"> --}}
     </head>
 
     <body>
-        <div class="container-xxl bg-white p-0">
+
+        <div class="container-xxl bg-white p-0" style="min-height: 100vh;">
             <!-- Spinner Start -->
             <div id="spinner"
                 class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
@@ -48,14 +56,18 @@
 
             @include('frontend.layout.navbar')
 
-            @yield('content')
-
-            @include('frontend.layout.footer')
+            <div class="margin_top_60 my-5">
+                @yield('content')
+            </div>
 
             <!-- Back to Top -->
             <a href="#" class="btn btn-lg btn-secondary btn-lg-square back-to-top"><i
                     class="bi bi-arrow-up"></i></a>
         </div>
+        <div style="position: absolute;width:100%">
+            @include('frontend.layout.footer')
+        </div>
+
 
         <!-- JavaScript Libraries -->
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -70,6 +82,18 @@
 
         <!-- Template Javascript -->
         <script src="{{ asset('frontend') }}/js/main.js"></script>
+
+        {{-- toastr --}}
+        {{-- <script src="{{ asset('backend/assets/js/toastr.min.js') }}"></script> --}}
+
+        {{-- <script>
+            @if ($errors->any())
+                @foreach ($errors->all() as $error)
+                    toastr.error("{{ $error }}")
+                @endforeach
+            @endif
+        </script> --}}
+
     </body>
 
 </html>

@@ -157,6 +157,11 @@ h6,
 }
 
 @media (min-width: 992px) {
+    .margin_top_60 {
+        margin-top: 60px;
+        margin-bottom: 60px;
+    }
+
     .navbar-light {
         position: absolute;
         width: 100%;

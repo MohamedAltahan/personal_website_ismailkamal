@@ -8,14 +8,11 @@ use Illuminate\Http\Request;
 
 class AboutController extends Controller
 {
-    function index()
-    {
-        $content = About::first();
-        return view('admin.about.index', compact('content'));
-    }
+
     //============================================================
     function update(Request $request)
     {
+
         $request->validate([
             'content' => ['required']
         ]);
