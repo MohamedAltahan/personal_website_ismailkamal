@@ -44,10 +44,6 @@
         {{-- <link rel="stylesheet" href="{{ asset('backend/assets/css/toastr.min.css') }}"> --}}
 
         <style>
-            h1 {
-                font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-            }
-
             body {
                 background-color: {{ $color->main_background }} !important;
             }
