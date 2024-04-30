@@ -46,6 +46,8 @@
         <style>
             body {
                 background-color: {{ $color->main_background }} !important;
+                max-width: 100%;
+                overflow-x: hidden;
             }
 
             .main_header {

@@ -14,8 +14,8 @@
             </a>
 
         </div>
-        <div class="col-lg-6 text-center ">
-            <img class=" animated zoomIn" height="700px" style="background-size: cover"
+        <div class="col-lg-6 col-sm-6 text-center ">
+            <img class=" animated zoomIn" height="600px" style="background-size: cover"
                 src="{{ asset('uploads/' . $homePageSetting->image) }}" alt="">
         </div>
     </div>
