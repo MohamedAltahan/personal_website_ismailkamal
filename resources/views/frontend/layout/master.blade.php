@@ -88,7 +88,7 @@
 
             @include('frontend.layout.navbar')
 
-            <div class="margin_top_60 py-5 ">
+            <div class="margin_top_60  ">
                 @yield('content')
             </div>
 

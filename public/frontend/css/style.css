@@ -135,6 +135,10 @@ h6,
         background: #ffffff;
     }
 
+    .margin_top_60 {
+        padding-top: 0px;
+        padding-bottom: 0px;
+    }
     .navbar-light .navbar-collapse {
         margin-top: 15px;
         border-top: 1px solid #dddddd;
