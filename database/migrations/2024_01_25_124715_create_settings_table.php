@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
+            $table->enum('banner_at_home', ['inactive', 'active'])->default('active');
             $table->string('site_name');
             $table->string('contact_email');
             $table->string('contact_phone');

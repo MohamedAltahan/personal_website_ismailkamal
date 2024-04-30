@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class HomePageSetting extends Model
 {
     use HasFactory;
-    protected $fillable = ['image', 'main_title', 'description'];
+    protected $fillable = ['image', 'main_title', 'description', 'banner_at_home'];
 }

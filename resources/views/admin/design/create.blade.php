@@ -43,14 +43,14 @@
                     </div>
                 </div>
 
-                <div class="col-md-6">
+                {{-- <div class="col-md-6">
                     <div class="form-group">
                         <label for="">Sub category</label>
                         <select name="sub_category_id" id="" class="form-control sub-category">
                             <option value="">select</option>
                         </select>
                     </div>
-                </div>
+                </div> --}}
             </div>
 
             <div class="form-group">
@@ -71,35 +71,35 @@
 @push('scripts')
     <script>
         //get sub categories-----------------------------------------------------
-        $('body').on('change', '.main-category', function(e) {
-            let id = $(this).val();
-            $.ajax({
-                method: 'GET',
-                url: '{{ route('admin.get-sub-categories') }}',
-                data: {
-                    id
-                },
-                success: function(data) {
-                    $('.sub-category').html(
-                        `<option value="">Select sub category</option>`);
-                    $('.child-category').html(
-                        `<option value="">Select child category</option>`);
-                    if (Object.values(data).length === 0) {
-                        $('.sub-category').append(
-                            `<option value="">No sub category</option>`
-                        );
-                    } else {
-                        $.each(data, function(index, item) {
-                            $('.sub-category').append(
-                                `<option value="${item.id}">${item.name}</option>`
-                            );
-                        })
-                    }
-                },
-                error: function() {
-                    alert("Error");
-                }
-            })
-        })
+        // $('body').on('change', '.main-category', function(e) {
+        //     let id = $(this).val();
+        //     $.ajax({
+        //         method: 'GET',
+        //         url: '{{ route('admin.get-sub-categories') }}',
+        //         data: {
+        //             id
+        //         },
+        //         success: function(data) {
+        //             $('.sub-category').html(
+        //                 `<option value="">Select sub category</option>`);
+        //             $('.child-category').html(
+        //                 `<option value="">Select child category</option>`);
+        //             if (Object.values(data).length === 0) {
+        //                 $('.sub-category').append(
+        //                     `<option value="">No sub category</option>`
+        //                 );
+        //             } else {
+        //                 $.each(data, function(index, item) {
+        //                     $('.sub-category').append(
+        //                         `<option value="${item.id}">${item.name}</option>`
+        //                     );
+        //                 })
+        //             }
+        //         },
+        //         error: function() {
+        //             alert("Error");
+        //         }
+        //     })
+        // })
     </script>
 @endpush

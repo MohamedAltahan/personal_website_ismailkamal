@@ -72,7 +72,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-6">
+                {{-- <div class="col-md-6">
                     <div class="form-group">
                         <label for="">Sub category</label>
                         <select name="sub_category_id" id="" class="form-control sub-category">
@@ -85,7 +85,7 @@
                             @endif
                         </select>
                     </div>
-                </div>
+                </div> --}}
             </div>
 
             <button type="submit" class="btn btn-primary">Update</button>
@@ -98,36 +98,36 @@
 @push('scripts')
     <script>
         //get sub categories_____________________________________________________
-        $('body').on('change', '.main-category', function(e) {
-            let id = $(this).val();
-            $.ajax({
-                method: 'GET',
-                url: '{{ route('admin.get-sub-categories') }}',
-                data: {
-                    id
-                },
-                success: function(data) {
-                    $('.sub-category').html(
-                        `<option value="">Select sub category</option>`);
-                    $('.child-category').html(
-                        `<option value="">Select child category</option>`);
-                    if (Object.values(data).length === 0) {
-                        $('.sub-category').append(
-                            `<option value="">No sub category</option>`
-                        );
-                    } else {
-                        $.each(data, function(index, item) {
-                            $('.sub-category').append(
-                                `<option value="${item.id}">${item.name}</option>`
-                            );
-                        })
-                    }
-                },
-                error: function() {
-                    alert("Error");
-                }
-            })
-        })
+        // $('body').on('change', '.main-category', function(e) {
+        //     let id = $(this).val();
+        //     $.ajax({
+        //         method: 'GET',
+        //         url: '{{ route('admin.get-sub-categories') }}',
+        //         data: {
+        //             id
+        //         },
+        //         success: function(data) {
+        //             $('.sub-category').html(
+        //                 `<option value="">Select sub category</option>`);
+        //             $('.child-category').html(
+        //                 `<option value="">Select child category</option>`);
+        //             if (Object.values(data).length === 0) {
+        //                 $('.sub-category').append(
+        //                     `<option value="">No sub category</option>`
+        //                 );
+        //             } else {
+        //                 $.each(data, function(index, item) {
+        //                     $('.sub-category').append(
+        //                         `<option value="${item.id}">${item.name}</option>`
+        //                     );
+        //                 })
+        //             }
+        //         },
+        //         error: function() {
+        //             alert("Error");
+        //         }
+        //     })
+        // })
 
         // delete image ______________________________________________________________
         $('body').on('click', '.delete-image', function(e) {

@@ -69,4 +69,15 @@ class HomePageSettingController extends Controller
         toastr('Added successfully');
         return redirect()->back();
     }
+
+    //change status using ajax request--------------------------------------------------
+    public function changeStatus(Request $request)
+    {
+        $setting = HomePageSetting::first();
+
+        $request->status == "true" ? $setting->banner_at_home = 'active' : $setting->banner_at_home = 'inactive';
+        $setting->save();
+
+        return response(['message' => 'Status has been updated']);
+    }
 }

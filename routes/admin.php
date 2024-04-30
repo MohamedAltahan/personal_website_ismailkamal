@@ -45,6 +45,7 @@ Route::group(
         Route::put('website-color', [WebsiteColorController::class, 'update'])->name('website-color.update');
 
         // update home page______________________________________________________________________________
+        Route::put('banner-at-home/change-status', [HomePageSettingController::class, 'changeStatus'])->name('banner-at-home.change-status');
         Route::put('home-page-setting', [HomePageSettingController::class, 'update'])->name('home-page-setting.update');
         Route::put('media-on-home-page', [HomePageSettingController::class, 'mediaOnHomePageUpdate'])->name('media-on-home-page.update');
 
