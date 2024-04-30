@@ -17,7 +17,7 @@
                 <img class="col-12 rounded" src="{{ asset('uploads/' . $image->name) }}">
             @endforeach
 
-            <a href="{{ route('contact.index') }}" class="btn btn-warning mt-5 ">Send us a message</a>
+            <a href="{{ route('contact.index') }}" class="btn btn-color text-black mt-5 ">Send us a message</a>
         </div>
     </div>
     <!-- Service End -->

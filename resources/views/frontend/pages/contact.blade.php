@@ -8,7 +8,7 @@
     <div class="container py-5 px-lg-5">
         <div class="wow fadeInUp text-center" data-wow-delay="0.1s">
             <p class="section-title text-secondary justify-content-center"><span></span>Contact Us<span></span></p>
-            <h1 class="text-center mb-5">Contact For Any Query</h1>
+            <h1 class="text-center text-warning mb-5">Contact For Any Query</h1>
             <p class="text-secondary">
                 For emergency contact (Whatsapp) {{ $setting->contact_phone }}
             </p>
@@ -48,7 +48,7 @@
                                 </div>
                             </div>
                             <div class="col-12">
-                                <button class="btn btn-primary w-100 py-3" type="submit">Send Message</button>
+                                <button class="btn btn-color text-dark w-100 py-3" type="submit">Send Message</button>
                             </div>
                         </div>
                     </form>

@@ -22,8 +22,8 @@
             <li class="{{ setActive(['admin.category.*']) }}"><a href="{{ route('admin.category.index') }}"
                     class="nav-link "><i class="fas fa-cog"></i><span>Categories</span></a></li>
 
-            <li class="{{ setActive(['admin.sub-category.*']) }}"><a href="{{ route('admin.sub-category.index') }}"
-                    class="nav-link "><i class="fas fa-cog"></i><span>SubCategories</span></a></li>
+            {{-- <li class="{{ setActive(['admin.sub-category.*']) }}"><a href="{{ route('admin.sub-category.index') }}"
+                    class="nav-link "><i class="fas fa-cog"></i><span>SubCategories</span></a></li> --}}
 
             <li class="{{ setActive(['admin.show-designs.*']) }}"><a href="{{ route('admin.show-designs.index') }}"
                     class="nav-link "><i class="fas fa-pen-fancy"></i><span>Designs</span></a></li>

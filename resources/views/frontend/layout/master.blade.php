@@ -8,6 +8,8 @@
             $categories = \App\Models\Category::where('status', 'active')->get();
             $socials = \App\Models\Social::where('status', 'active')->get();
             $logo = \App\Models\LogoSetting::first();
+            $color = \App\Models\WebsiteColor::first() ?? new \App\Models\WebsiteColor();
+
         @endphp
         <meta charset="utf-8">
         <title>@yield('title', $setting->site_name)</title>
@@ -40,11 +42,15 @@
         <link href="{{ asset('frontend') }}/css/style.css" rel="stylesheet">
         {{-- toastr --}}
         {{-- <link rel="stylesheet" href="{{ asset('backend/assets/css/toastr.min.css') }}"> --}}
+
+        <style>
+
+        </style>
     </head>
 
     <body>
 
-        <div class="container-xxl bg-white p-0" style="min-height: 100vh;">
+        <div class="container big_container_color p-0" style="min-height: 100vh;">
             <!-- Spinner Start -->
             <div id="spinner"
                 class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
@@ -56,7 +62,7 @@
 
             @include('frontend.layout.navbar')
 
-            <div class="margin_top_60 my-5">
+            <div class="margin_top_60 py-5 ">
                 @yield('content')
             </div>
 

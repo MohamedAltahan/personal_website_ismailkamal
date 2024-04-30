@@ -4,11 +4,12 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\About;
-use App\Models\EmailConfiguration;
 use App\Models\HomePageSetting;
+use App\Models\Image;
 use App\Models\LogoSetting;
-use App\Models\PusherSetting;
 use App\Models\Setting;
+use App\Models\Video;
+use App\Models\WebsiteColor;
 use App\Traits\fileUploadTrait;
 use Illuminate\Http\Request;
 
@@ -22,7 +23,18 @@ class SettingController extends Controller
         $logoSetting = LogoSetting::first();
         $content = About::first();
         $homePage = HomePageSetting::first();
-        return view('admin.setting.index', compact('setting', 'logoSetting', 'content', 'homePage'));
+        $videos = Video::where('at_home', 'yes')->get();
+        $images = Image::where('at_home', 'yes')->get();
+        $color = WebsiteColor::first();
+        return view('admin.setting.index', compact(
+            'setting',
+            'logoSetting',
+            'content',
+            'homePage',
+            'videos',
+            'images',
+            'color'
+        ));
     }
 
     //__________________________________________________________________

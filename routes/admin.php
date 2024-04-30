@@ -11,6 +11,7 @@ use App\Http\Controllers\Backend\ShowDesignController;
 use App\Http\Controllers\Backend\EmailInboxController;
 use App\Http\Controllers\Backend\HomePageSettingController;
 use App\Http\Controllers\Backend\SocialController;
+use App\Http\Controllers\Backend\WebsiteColorController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(
@@ -40,9 +41,12 @@ Route::group(
         // update About page______________________________________________________________________________
         Route::put('about/update', [AboutController::class, 'update'])->name('about.update');
 
+        // website color______________________________________________________________________________
+        Route::put('website-color', [WebsiteColorController::class, 'update'])->name('website-color.update');
+
         // update home page______________________________________________________________________________
         Route::put('home-page-setting', [HomePageSettingController::class, 'update'])->name('home-page-setting.update');
-
+        Route::put('media-on-home-page', [HomePageSettingController::class, 'mediaOnHomePageUpdate'])->name('media-on-home-page.update');
 
         //desgin _____________________________________________________________________________
         Route::delete('design/delete-design-video', [DesignController::class, 'deleteDesignVideo'])->name('design.delete-design-video');

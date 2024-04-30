@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('images', function (Blueprint $table) {
             $table->id();
             $table->text('name');
-            $table->integer('design_id');
+            $table->enum('at_home', ['no', 'yes'])->default('no');
+            $table->integer('design_id')->nullable();
             $table->timestamps();
         });
     }

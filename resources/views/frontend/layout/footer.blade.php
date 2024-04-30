@@ -1,6 +1,6 @@
 <!-- Footer Start -->
 <div>
-    <div class="container-fluid bg-primary text-light wow fadeIn rounded-top" data-wow-delay="0.2s">
+    <div class="container-fluid main_header text-light wow fadeIn rounded-top" data-wow-delay="0.2s">
         <div class="container  ">
             <div class="row py-3">
                 <div class="col-md-12  d-flex justify-content-center">
@@ -12,7 +12,7 @@
                         <p><i class="fa fa-envelope me-3"></i>{{ $setting->contact_email }}</p>
                     </div> --}}
 
-                    <div class="d-flex pt-2">
+                    <div class="d-flex py-2">
                         @foreach ($socials as $social)
                             <a target="_blank" class="btn btn-outline-light btn-social mx-1" href="{{ $social->link }}"><i
                                     class="{{ $social->icon }}"></i></a>

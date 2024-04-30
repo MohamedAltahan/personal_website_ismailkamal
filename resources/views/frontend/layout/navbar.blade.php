@@ -1,30 +1,30 @@
 <div class="container-xxl position-relative p-0">
-    <nav class="navbar sticky-top shadow-sm navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
+    <nav class="navbar navbar_color sticky-top shadow-sm navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
         <a href="{{ url('/') }}" class="navbar-brand p-0">
             <img class="mb-3" src="{{ asset('uploads/' . $logo->main_logo) }}" alt="Logo">
-            <h1 class="m-0" style="display: inline-block">{{ $setting->site_name }}</h1>
+            <h1 class="m-0 text-warning" style="display: inline-block">{{ $setting->site_name }}</h1>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="fa fa-bars"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav mx-auto py-0">
-                <a href="{{ route('home') }}" class="nav-item nav-link {{ setActive(['home']) }}">Home</a>
-                <a href="{{ route('about') }}" class="nav-item nav-link {{ setActive(['about']) }}">About</a>
+                <a href="{{ route('home') }}" class="nav-item nav-link text_color {{ setActive(['home']) }}">Home</a>
+                <a href="{{ route('about') }}" class="nav-item nav-link text_color{{ setActive(['about']) }}">About</a>
                 <a href="{{ route('contact.index') }}"
-                    class="nav-item nav-link {{ setActive(['contact.*']) }}">Contact</a>
+                    class="nav-item nav-link text_color{{ setActive(['contact.*']) }}">Contact</a>
                 @foreach ($categories as $category)
                     <a href="{{ route('category.show', ['id' => $category->id]) }}"
-                        class="nav-item nav-link @if (request()->is("category/$category->id")) active @endif ">
+                        class="nav-item nav-link text_color @if (request()->is("category/$category->id")) active @endif ">
                         {{ $category->name }}</a>
                 @endforeach
             </div>
             @auth
-                <a href="{{ route('admin.get-emails.index') }}"
-                    class="btn btn-warning rounded-pill py-2 px-4  d-lg-block"><i class="fas fa-edit"></i> control
+                <a href="{{ route('admin.get-emails.index') }}" class="btn btn-color rounded-pill py-2 px-4  d-lg-block"><i
+                        class="fas fa-edit"></i> control
                     panel</a>
             @else
-                <a href="{{ route('admin.login') }}" class="btn btn-warning rounded-pill py-2 px-4  d-lg-block">Login</a>
+                <a href="{{ route('admin.login') }}" class="btn btn-color rounded-pill py-2 px-4  d-lg-block">Login</a>
             @endauth
         </div>
     </nav>
