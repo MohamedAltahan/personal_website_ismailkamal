@@ -44,7 +44,30 @@
         {{-- <link rel="stylesheet" href="{{ asset('backend/assets/css/toastr.min.css') }}"> --}}
 
         <style>
+            body {
+                background-color: {{ $color->main_background }} !important;
+            }
 
+            .main_header {
+                background-color: {{ $color->main_banner }} !important;
+            }
+
+            .navbar_color {
+                background-color: {{ $color->navbar }} !important;
+            }
+
+            .big_container_color {
+                background-color: {{ $color->secondary_background }} !important;
+
+            }
+
+            .btn-color {
+                background-color: {{ $color->btn }} !important;
+            }
+
+            .text_color {
+                color: {{ $color->text }} !important;
+            }
         </style>
     </head>
 
