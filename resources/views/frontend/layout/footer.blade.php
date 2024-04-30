@@ -1,6 +1,6 @@
 <!-- Footer Start -->
 <div>
-    <div class="container-fluid main_header text-light wow fadeIn rounded-top" data-wow-delay="0.2s">
+    <div class="container-fluid main_header text-light rounded-top">
         <div class="container  ">
             <div class="row py-3">
                 <div class="col-md-12  d-flex justify-content-center">
