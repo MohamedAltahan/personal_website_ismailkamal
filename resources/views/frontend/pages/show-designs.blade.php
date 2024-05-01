@@ -6,7 +6,7 @@
     <!-- Projects Start -->
     <div class="container py-5 ">
         <div class="wow fadeInUp" data-wow-delay="0.1s">
-            <p class="section-title text-secondary justify-content-center mb-5"><span></span>Our Projects<span></span></p>
+            {{-- <p class="section-title text-secondary justify-content-center mb-5"><span></span>Our Projects<span></span></p> --}}
             {{-- <h1 class="text-center mb-5">Recently Completed Projects</h1> --}}
         </div>
 

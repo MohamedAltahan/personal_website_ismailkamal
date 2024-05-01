@@ -2,7 +2,7 @@
     <nav class="navbar navbar_color sticky-top shadow-sm navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
         <a href="{{ url('/') }}" class="navbar-brand p-0">
             <img class="mb-3" src="{{ asset('uploads/' . $logo->main_logo) }}" alt="Logo">
-            <h1 class="m-0 text-warning" style="display: inline-block">{{ $setting->site_name }}</h1>
+            {{-- <h1 class="m-0 text-warning" style="display: inline-block">{{ $setting->site_name }}</h1> --}}
         </a>
         <button class="navbar-toggler text_color" type="button" data-bs-toggle="collapse"
             data-bs-target="#navbarCollapse">
@@ -10,7 +10,6 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav mx-auto py-0">
-                <a href="{{ route('home') }}" class="nav-item nav-link text_color {{ setActive(['home']) }}">Home</a>
                 <a href="{{ route('about') }}" class="nav-item nav-link text_color {{ setActive(['about']) }}">About</a>
                 <a href="{{ route('contact.index') }}"
                     class="nav-item nav-link text_color {{ setActive(['contact.*']) }}">Contact</a>
@@ -20,13 +19,7 @@
                         {{ $category->name }}</a>
                 @endforeach
             </div>
-            @auth
-                <a href="{{ route('admin.get-emails.index') }}" class="btn btn_color rounded-pill py-2 px-4  d-lg-block"><i
-                        class="fas fa-edit"></i> control
-                    panel</a>
-            @else
-                <a href="{{ route('admin.login') }}" class="btn btn_color rounded-pill py-2 px-4  d-lg-block">Login</a>
-            @endauth
+
         </div>
     </nav>
     @if (Route::is('home') && $homePageSetting->banner_at_home == 'active')

@@ -10,7 +10,7 @@
                         <div class="col-6">
                             <button id="{{ $video->id }}"
                                 class="fas fa-times-circle delete-video btn btn-danger btn-sm"
-                                style="position: absolute">
+                                style="position: absolute; z-index:100">
                                 delete</button>
                             <video width="320" height="240" controls>
                                 <source src="{{ asset('uploads/' . $video->name) }}" type="video/mp4">
