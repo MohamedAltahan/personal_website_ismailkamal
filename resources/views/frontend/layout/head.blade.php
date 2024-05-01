@@ -9,7 +9,7 @@
 
             </p>
             <a href="{{ route('contact.index') }}"
-                class="btn btn-color text-dark py-sm-3 px-sm-5 rounded-pill me-3 animated slideInLeft">
+                class="btn btn_color text-dark py-sm-3 px-sm-5 rounded-pill me-3 animated slideInLeft">
                 Contact Us
             </a>
 

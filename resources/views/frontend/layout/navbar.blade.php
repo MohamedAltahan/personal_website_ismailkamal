@@ -21,11 +21,11 @@
                 @endforeach
             </div>
             @auth
-                <a href="{{ route('admin.get-emails.index') }}" class="btn btn-color rounded-pill py-2 px-4  d-lg-block"><i
+                <a href="{{ route('admin.get-emails.index') }}" class="btn btn_color rounded-pill py-2 px-4  d-lg-block"><i
                         class="fas fa-edit"></i> control
                     panel</a>
             @else
-                <a href="{{ route('admin.login') }}" class="btn btn-color rounded-pill py-2 px-4  d-lg-block">Login</a>
+                <a href="{{ route('admin.login') }}" class="btn btn_color rounded-pill py-2 px-4  d-lg-block">Login</a>
             @endauth
         </div>
     </nav>

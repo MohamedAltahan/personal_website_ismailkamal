@@ -47,7 +47,7 @@
                                 </div>
                             </div>
                             <div class="col-12">
-                                <button class="btn btn-color text-dark w-100 py-3" type="submit">Send Message</button>
+                                <button class="btn btn_color text-dark w-100 py-3" type="submit">Send Message</button>
                             </div>
                         </div>
                     </form>

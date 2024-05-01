@@ -61,10 +61,9 @@
 
             .big_container_color {
                 background-color: {{ $color->secondary_background }} !important;
-
             }
 
-            .btn-color {
+            .btn_color {
                 background-color: {{ $color->btn }} !important;
             }
 
