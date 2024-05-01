@@ -44,7 +44,8 @@
         {{-- <link rel="stylesheet" href="{{ asset('backend/assets/css/toastr.min.css') }}"> --}}
 
         <style>
-            body {
+            body,
+            html {
                 background-color: {{ $color->main_background }} !important;
                 max-width: 100%;
                 overflow-x: hidden;
