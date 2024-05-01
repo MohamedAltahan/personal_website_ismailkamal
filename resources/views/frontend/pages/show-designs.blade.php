@@ -29,8 +29,8 @@
                 </div>
             @empty
                 <div>
-                    <h1 class="text-primary justify-content-center d-flex">
-                        <span>There's no designs yet</span>
+                    <h1 class="text-warning justify-content-center d-flex">
+                        <span>No designs in this section yet.</span>
                     </h1>
                 </div>
             @endforelse
