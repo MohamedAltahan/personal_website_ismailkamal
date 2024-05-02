@@ -44,12 +44,16 @@ class HomePageSettingController extends Controller
         ]);
 
 
+        if ($request->has('video_thumbnail')) {
+            $video_thumbnail = $this->fileUplaod($request, 'myDisk', 'video_thumbnail', 'video_thumbnail');
+        }
+
         if ($request->has('video')) {
             $video = $this->fileUplaod($request, 'myDisk', 'videos', 'video');
             Video::create([
                 'design_id' => null,
                 'name' => $video,
-                'video_thumbnail' => $request->video_thumbnail,
+                'video_thumbnail' => $video_thumbnail,
                 'at_home' => 'yes'
             ]);
         }

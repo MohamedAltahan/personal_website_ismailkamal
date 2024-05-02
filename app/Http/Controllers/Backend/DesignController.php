@@ -219,6 +219,7 @@ class DesignController extends Controller
         $this->deleteFile('myDisk', $design_video->video_thumbnail);
         $design_video->delete();
     }
+
     //updateVideoThumbnail______________________________________________________________________
     public function updateVideoThumbnail(Request $request, $id)
     {
@@ -228,6 +229,9 @@ class DesignController extends Controller
         $video = Video::findOrFail($id);
         $video->update(['video_thumbnail' => $video_thumbnail]);
 
+        if ($video->at_home) {
+            return redirect()->back();
+        }
         return  redirect()->route('admin.design.edit', $video->design);
     }
 }

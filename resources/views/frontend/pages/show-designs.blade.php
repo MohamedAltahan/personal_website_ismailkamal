@@ -19,12 +19,12 @@
                                     src="{{ asset('uploads/' . $design->thumbnail) }}" alt="">
                             </a>
                         </div>
-                        <div class="bg-light p-4">
+                        {{-- <div class="bg-light p-4">
                             <p class="text-primary fw-medium mb-2">{{ $design->category->name }}</p>
                             <a href="{{ route('design-details.index', $design->id) }}">
                                 <h5 class="lh-base mb-0">{{ $design->name }}</h5>
                             </a>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             @empty

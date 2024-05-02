@@ -1,13 +1,7 @@
 @extends('admin.layouts.master')
 @section('mainTitle', 'Designs')
 @section('content')
-    @push('styles')
-        <style>
-            .modal-backdrop {
-                z-index: -1;
-            }
-        </style>
-    @endpush
+
     <div class="card-header">
         <h4>Update design</h4>
         <div class="card-header-action">
@@ -97,7 +91,7 @@
             </div>
 
             <div class="form-group">
-                <x-form.input name="video" multiple type='file' label="Select your video" class="form-control" />
+                <x-form.input name="video" type='file' label="Select your video" class="form-control" />
             </div>
 
             <div class="form-group">
@@ -218,6 +212,7 @@
             })
         });
 
+
         // delete video thumbnail ______________________________________________________________
         $('body').on('click', '.delete-video-thumbnail', function(e) {
             e.preventDefault();
@@ -264,6 +259,7 @@
             })
         });
     </script>
+
     <script>
         $('body').on('click', '.add_thumbnail', function(e) {
             let link = $(this).data('id');

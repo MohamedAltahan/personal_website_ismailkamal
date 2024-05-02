@@ -6,7 +6,7 @@
 
             @foreach ($videos as $video)
                 <video class="col-12 rounded"
-                    poster="{{ $video->video_thumbnail ? asset('uploads/' . $video->thumbnail) : null }}" controls>
+                    poster="{{ $video->video_thumbnail ? asset('uploads/' . $video->video_thumbnail) : null }}" controls>
                     <source src="{{ asset('uploads/' . $video->name) }}" type="video/mp4">
                 </video>
             @endforeach

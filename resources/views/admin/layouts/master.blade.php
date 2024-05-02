@@ -44,8 +44,13 @@
             gtag('config', 'UA-94034622-3');
         </script>
         <!-- /END GA -->
-        <script></script>
-        <script></script>
+
+
+        <style>
+            .modal-backdrop {
+                z-index: -1;
+            }
+        </style>
 
     </head>
 
