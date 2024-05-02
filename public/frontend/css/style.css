@@ -417,7 +417,7 @@ h6,
     height: 100%;
     top: 0;
     left: 0;
-    background: rgba(98, 34, 204, 0.9);
+    background: rgba(0, 0, 0, 0.521);
     transition: 0.5s;
     opacity: 0;
 }

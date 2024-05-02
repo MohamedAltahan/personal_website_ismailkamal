@@ -14,11 +14,22 @@
             @forelse ($designs as $design)
                 <div class="col-lg-4 col-md-6 portfolio-item first wow fadeInUp" data-wow-delay="0.1s">
                     <div class="rounded overflow-hidden">
+
                         <div class="position-relative overflow-hidden">
-                            <a href="{{ route('design-details.index', $design->id) }}"> <img class="img-fluid w-100"
-                                    src="{{ asset('uploads/' . $design->thumbnail) }}" alt="">
+                            <a href="{{ route('design-details.index', $design->id) }}">
+                                <img class="img-fluid w-100" src="{{ asset('uploads/' . $design->thumbnail) }}"
+                                    alt="">
+
+
+                                <a href="{{ route('design-details.index', $design->id) }}">
+                                    <div class="portfolio-overlay text-light"> {{ $design->name }}
+                                    </div>
+                                </a>
+
                             </a>
                         </div>
+
+
                         {{-- <div class="bg-light p-4">
                             <p class="text-primary fw-medium mb-2">{{ $design->category->name }}</p>
                             <a href="{{ route('design-details.index', $design->id) }}">
