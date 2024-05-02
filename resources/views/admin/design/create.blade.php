@@ -12,7 +12,6 @@
         <form action="{{ route('admin.design.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
-
             <div class="form-group">
                 <x-form.input name="name" label="Design name" class="form-control" />
             </div>
@@ -21,16 +20,23 @@
                 <x-form.input name="thumbnail" type='file' label="Select design's thumbnail" class="form-control" />
             </div>
 
+            <hr style="height: 2px;background-color:black">
+
             <div class="form-group">
-                <x-form.input name="video[]" multiple type='file' label="Select your video" class="form-control" />
+                <x-form.input name="video" multiple type='file' label="Select your video" class="form-control" />
             </div>
+            <div class="form-group">
+                <x-form.input name="video_thumbnail" type='file' label="Select video's thumbnail" class="form-control" />
+            </div>
+
+            <hr style="height: 2px;background-color:black">
 
             <div class="form-group">
                 <x-form.input name="image[]" multiple type='file' label="Select photos(if exist)" class="form-control" />
             </div>
 
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <div class="form-group">
                         <label for="">Category</label>
                         <select name="category_id" id="" class="form-control main-category">

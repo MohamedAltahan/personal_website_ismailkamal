@@ -1,12 +1,12 @@
 @extends('frontend.layout.master')
 
-
 @section('content')
     <div class="container py-5 text-center">
         <div class="wow fadeInUp" data-wow-delay="0.1s">
 
             @foreach ($videos as $video)
-                <video class="col-12 rounded" controls>
+                <video class="col-12 rounded"
+                    poster="{{ $video->video_thumbnail ? asset('uploads/' . $video->thumbnail) : null }}" controls>
                     <source src="{{ asset('uploads/' . $video->name) }}" type="video/mp4">
                 </video>
             @endforeach

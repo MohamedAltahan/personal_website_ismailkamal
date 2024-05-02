@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('videos', function (Blueprint $table) {
             $table->id();
             $table->text('name');
+            $table->text('video_thumbnail')->nullable();
             $table->integer('design_id')->nullable();
             $table->enum('at_home', ['no', 'yes'])->default('no');
             $table->timestamps();

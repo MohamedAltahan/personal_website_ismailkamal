@@ -26,12 +26,12 @@
 
                 <div class="form-group">
                     <label for="">Main title</label>
-                    <textarea class="form-control" name="main_title">{{ @$homePage->main_title }}</textarea>
+                    <textarea class="form-control summernote" name="main_title">{{ @$homePage->main_title }}</textarea>
                 </div>
 
                 <div class="form-group">
                     <label for="">Description (will appear under "main title")</label>
-                    <textarea class="form-control" name="description" label='description'>{{ @$homePage->description }}</textarea>
+                    <textarea class="form-control summernote" name="description" label='description'>{{ @$homePage->description }}</textarea>
                 </div>
 
                 <button type="submit" class="btn btn-primary">Update</button>

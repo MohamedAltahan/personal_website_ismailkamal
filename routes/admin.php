@@ -50,8 +50,10 @@ Route::group(
         Route::put('media-on-home-page', [HomePageSettingController::class, 'mediaOnHomePageUpdate'])->name('media-on-home-page.update');
 
         //desgin _____________________________________________________________________________
+        Route::put('update-video-thumbnail/{id}', [DesignController::class, 'updateVideoThumbnail'])->name('update-video-thumbnail');
         Route::delete('design/delete-design-video', [DesignController::class, 'deleteDesignVideo'])->name('design.delete-design-video');
         Route::delete('design/delete-design-image', [DesignController::class, 'deleteDesignImage'])->name('design.delete-design-image');
+        Route::delete('design/delete-video-thumbnail', [DesignController::class, 'deleteVideoThumbnail'])->name('design.delete-video-thumbnail');
         Route::put('design/change-status', [DesignController::class, 'changeStatus'])->name('design.change-status');
         Route::resource('design', DesignController::class);
 

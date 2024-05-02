@@ -37,8 +37,11 @@ trait fileUploadTrait
         return $path;
     }
 
-    public function deleteFile(string $diskName, string $fileName)
+    public function deleteFile($diskName,  $fileName)
     {
+        if ($fileName == null) {
+            return;
+        }
         //delete the old file from storage
         if ($fileName != null && Storage::disk($diskName)->exists($fileName)) {
             Storage::disk($diskName)->delete($fileName);

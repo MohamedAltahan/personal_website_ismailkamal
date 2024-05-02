@@ -11,6 +11,7 @@
             $color = \App\Models\WebsiteColor::first() ?? new \App\Models\WebsiteColor();
 
         @endphp
+
         <meta charset="utf-8">
         <title>@yield('title', $setting->site_name)</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -76,7 +77,7 @@
 
     <body>
 
-        <div class="container big_container_color p-0" style="min-height: 100vh;">
+        <div class="container big_container_color p-0" style="min-height: 87vh;">
             <!-- Spinner Start -->
             <div id="spinner"
                 class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">

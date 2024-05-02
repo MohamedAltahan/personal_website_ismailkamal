@@ -58,7 +58,7 @@ class FooterController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'logo' => ['nullable', 'image', 'max:300'],
+            'logo' => ['nullable', 'image', 'max:5000'],
             'phone' => ['max:50'],
             'email' => ['max:50'],
             'address' => ['max:400'],

@@ -25,8 +25,10 @@
             {{-- <li class="{{ setActive(['admin.sub-category.*']) }}"><a href="{{ route('admin.sub-category.index') }}"
                     class="nav-link "><i class="fas fa-cog"></i><span>SubCategories</span></a></li> --}}
 
-            <li class="{{ setActive(['admin.show-designs.*']) }}"><a href="{{ route('admin.show-designs.index') }}"
-                    class="nav-link "><i class="fas fa-pen-fancy"></i><span>Designs</span></a></li>
+            <li class="{{ setActive(['admin.show-designs.*', 'admin.design.*']) }}"><a
+                    href="{{ route('admin.show-designs.index') }}" class="nav-link "><i
+                        class="fas fa-pen-fancy"></i><span>Designs</span></a></li>
+
             <li class="{{ setActive(['admin.socials.*']) }}"><a href="{{ route('admin.socials.index') }}"
                     class="nav-link "><i class="fab fa-facebook-square"></i><span>Social buttons</span></a></li>
         </ul>

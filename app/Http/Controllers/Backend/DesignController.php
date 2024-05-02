@@ -14,13 +14,7 @@ use Illuminate\Http\Request;
 class DesignController extends Controller
 {
     use fileUploadTrait;
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -39,16 +33,18 @@ class DesignController extends Controller
 
         $request->validate([
             'name' => ['required'],
-            'thumbnail' => ['image', 'max:5000'],
+            'thumbnail' => ['image', 'max:20000'],
+            'video_thumbnail' => ['image', 'max:20000'],
             'image.*' => ['image'],
-            'video.*' => ['mimetypes:video/avi,video/mpeg,video/quicktime,video/mp4'],
+            'video' => ['mimetypes:video/avi,video/mpeg,video/quicktime,video/mp4'],
             'category_id' => ['required', 'integer'],
             'status' => ['required'],
         ]);
 
         if ($request->has('thumbnail')) {
-
             $thumbnail = $this->fileUplaod($request, 'myDisk', 'thumbnails', 'thumbnail');
+        } else {
+            $thumbnail = null;
         }
 
         $design = Design::create([
@@ -59,14 +55,21 @@ class DesignController extends Controller
             'status' => $request->status,
         ]);
 
+        //uplaod video_thumbnail
+        if ($request->has('video_thumbnail')) {
+            $video_thumbnail = $this->fileUplaod($request, 'myDisk', 'video_thumbnail', 'video_thumbnail');
+        } else {
+            $video_thumbnail = null;
+        }
+
         if ($request->has('video')) {
-            $videos = $this->filesUplaod($request, 'myDisk', 'videos', 'video');
-            foreach ($videos as $video) {
-                Video::create([
-                    'design_id' => $design->id,
-                    'name' => $video,
-                ]);
-            }
+            $video = $this->fileUplaod($request, 'myDisk', 'videos', 'video');
+            Video::create([
+                'design_id' => $design->id,
+                'name' => $video,
+                'video_thumbnail' => $video_thumbnail,
+                'at_home' => 'no'
+            ]);
         }
 
         if ($request->has('image')) {
@@ -78,22 +81,19 @@ class DesignController extends Controller
                 ]);
             }
         }
-        return redirect()->route('admin.show-designs.index');
+
+        toastr('Saved successfully');
+        return  redirect()->route('admin.design.edit', $design->id);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
     {
+
         $design = Design::with('images', 'videos')->findOrFail($id);
         $categories = Category::all();
         $subCategories = SubCategory::where('category_id', $design->category_id)->get();
@@ -107,7 +107,7 @@ class DesignController extends Controller
     {
         $request->validate([
             'name' => ['required'],
-            'thumbnail' => ['image', 'max:5000'],
+            'thumbnail' => ['image', 'max:20000'],
             'image.*' => ['image'],
             'video.*' => ['mimetypes:video/avi,video/mpeg,video/quicktime,video/mp4'],
             'category_id' => ['required', 'integer'],
@@ -115,20 +115,29 @@ class DesignController extends Controller
         ]);
 
         $design = Design::findOrFail($id);
+
         $updatedDesignData = $request->except('video', 'image');
+
         if ($request->has('thumbnail')) {
             $oldImagePath = $design->thumbnail;
             $updatedDesignData['thumbnail'] = $this->fileUpdate($request, 'myDisk', 'thumbnails', 'thumbnail', $oldImagePath);
         }
 
+        //uplaod video_thumbnail
+        if ($request->has('video_thumbnail')) {
+            $video_thumbnail = $this->fileUplaod($request, 'myDisk', 'video_thumbnail', 'video_thumbnail');
+        } else {
+            $video_thumbnail = null;
+        }
+
         if ($request->has('video')) {
-            $videos = $this->filesUplaod($request, 'myDisk', 'videos', 'video');
-            foreach ($videos as $video) {
-                Video::create([
-                    'design_id' => $design->id,
-                    'name' => $video,
-                ]);
-            }
+            $video = $this->fileUplaod($request, 'myDisk', 'videos', 'video');
+            Video::create([
+                'design_id' => $design->id,
+                'name' => $video,
+                'video_thumbnail' => $video_thumbnail,
+                'at_home' => 'no'
+            ]);
         }
 
         if ($request->has('image')) {
@@ -154,8 +163,23 @@ class DesignController extends Controller
     {
 
         $design = Design::findOrFail($id);
+
+        $this->deleteFile('myDisk', $design->thumbnail);
+
+        //delete videos from files then form database
+        foreach ($design->videos as $video) {
+            $this->deleteFile('myDisk', $video->video_thumbnail);
+            $this->deleteFile('myDisk', $video->name);
+        }
         Video::where('design_id', $design->id)->delete();
+
+        //delete photos from files then form database
+        foreach ($design->images as $image) {
+            $this->deleteFile('myDisk', $image->name);
+        }
         Image::where('design_id', $design->id)->delete();
+
+
         $design->delete();
         return response(['status' => 'success', 'message' => 'Deleted successfully']);
     }
@@ -179,11 +203,31 @@ class DesignController extends Controller
         $this->deleteFile('myDisk', $design_image->name);
     }
 
-    //delete Product Images using ajax____________________________________________________________
+    //delete video thumbnail using ajax____________________________________________________________
+    public function deleteVideoThumbnail(Request $request)
+    {
+        $video = Video::findOrFail($request->video_id);
+        $this->deleteFile('myDisk', $video->video_thumbnail);
+        $video->update(['video_thumbnail' => null]);
+    }
+
+    //delete video using ajax____________________________________________________________
     public function deleteDesignVideo(Request $request)
     {
         $design_video = Video::findOrFail($request->video_id);
-        $design_video->delete();
         $this->deleteFile('myDisk', $design_video->name);
+        $this->deleteFile('myDisk', $design_video->video_thumbnail);
+        $design_video->delete();
+    }
+    //updateVideoThumbnail______________________________________________________________________
+    public function updateVideoThumbnail(Request $request, $id)
+    {
+        if ($request->has('video_thumbnail')) {
+            $video_thumbnail = $this->fileUplaod($request, 'myDisk', 'video_thumbnail', 'video_thumbnail');
+        }
+        $video = Video::findOrFail($id);
+        $video->update(['video_thumbnail' => $video_thumbnail]);
+
+        return  redirect()->route('admin.design.edit', $video->design);
     }
 }

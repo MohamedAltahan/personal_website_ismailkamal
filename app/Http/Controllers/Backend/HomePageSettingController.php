@@ -17,8 +17,8 @@ class HomePageSettingController extends Controller
     {
         $request->validate([
             'image' => ['image'],
-            'main_title' => ['max:2000'],
-            'description' => ['max:2000']
+            'main_title' => ['max:4000'],
+            'description' => ['max:4000']
         ]);
 
         $setting = $request->except('image');
@@ -38,20 +38,20 @@ class HomePageSettingController extends Controller
     function mediaOnHomePageUpdate(Request $request)
     {
         $request->validate([
-            'image.*' => ['image'],
-            'video.*' => ['mimetypes:video/avi,video/mpeg,video/quicktime,video/mp4'],
+            'image.*' => ['image', 'max:20000'],
+            'video_thumbnail' => ['image', 'max:20000'],
+            'video' => ['mimetypes:video/avi,video/mpeg,video/quicktime,video/mp4'],
         ]);
 
 
         if ($request->has('video')) {
-            $videos = $this->filesUplaod($request, 'myDisk', 'videos', 'video');
-            foreach ($videos as $video) {
-                Video::create([
-                    'design_id' => null,
-                    'name' => $video,
-                    'at_home' => 'yes'
-                ]);
-            }
+            $video = $this->fileUplaod($request, 'myDisk', 'videos', 'video');
+            Video::create([
+                'design_id' => null,
+                'name' => $video,
+                'video_thumbnail' => $request->video_thumbnail,
+                'at_home' => 'yes'
+            ]);
         }
 
         if ($request->has('image')) {
