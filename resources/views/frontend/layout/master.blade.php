@@ -44,13 +44,23 @@
         {{-- toastr --}}
         {{-- <link rel="stylesheet" href="{{ asset('backend/assets/css/toastr.min.css') }}"> --}}
 
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+
         <style>
             body,
             html {
                 background-color: {{ $color->main_background }} !important;
                 max-width: 100%;
                 overflow-x: hidden;
+
+                font-family: "Varela Round", sans-serif;
+                font-weight: 400;
+                font-style: normal;
             }
+
 
             .main_header {
                 background-color: {{ $color->main_banner }} !important;
