@@ -33,6 +33,9 @@ class DesignsDataTable extends DataTable
                 $deleteBtn = "<a href='" . route('admin.design.destroy', $query->id)  . "'class='btn btn-sm ml-1 my-1 btn-danger delete-item'><i class='fas fa-trash'></i>Delete</a>";
                 return $editBtn . $deleteBtn;
             })
+            ->addColumn('category', function ($query) {
+                return $query->category->name;
+            })
             ->addColumn('status', function ($query) {
                 if ($query->status == 'active') {
                     $button = '<label class="custom-switch mt-2">
@@ -57,7 +60,7 @@ class DesignsDataTable extends DataTable
      */
     public function query(Design $model): QueryBuilder
     {
-        return $model->newQuery();
+        return $model->orderBy('category_id')->newQuery();
     }
 
     /**
@@ -91,6 +94,7 @@ class DesignsDataTable extends DataTable
             Column::make('id'),
             Column::make('thumbnail'),
             Column::make('name'),
+            Column::make('category'),
             Column::make('status'),
             Column::computed('action')
                 ->exportable(false)

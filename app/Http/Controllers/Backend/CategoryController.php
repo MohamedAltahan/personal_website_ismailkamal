@@ -34,7 +34,6 @@ class CategoryController extends Controller
     {
         // dd($request->all());
         $request->validate([
-            'icon' => ['required', 'not_in:empty'],
             'name' => ['required', 'max:200', 'unique:categories,name'],
             'status' => ['required']
         ]);
@@ -70,7 +69,6 @@ class CategoryController extends Controller
     {
 
         $request->validate([
-            'icon' => ['required', 'not_in:empty'],
             'name' => ['required', 'max:200', "unique:categories,name, $id"],
             'status' => ['required']
         ]);

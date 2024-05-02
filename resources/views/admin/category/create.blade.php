@@ -12,18 +12,7 @@
         <form action="{{ route('admin.category.store') }}" method="POST">
             @csrf
 
-            <div class="form-group">
-                <label for="">select icon</label>
-                <div>
-                    <button name="icon" data-selected-class="btn-danger" data-unselected-class="btn-info"
-                        class="btn btn-primary" role="iconpicker"></button>
-                    @error('icon')
-                        <div class="text-danger">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-            </div>
+
 
             <div class="form-group">
                 <x-form.input name="name" label="Name" class="form-control" />

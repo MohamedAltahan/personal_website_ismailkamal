@@ -3,12 +3,12 @@
     <div class="row g-5 align-items-center flex-wrap-reverse">
         <div class="col-lg-6 text-center text-lg-start ">
 
-            <span class="text-white mb-4 animated slideInDown px-2">
+            <div class="text-white mb-4 animated slideInDown px-2">
                 {!! $homePageSetting->main_title !!}
-            </span>
-            <span class="text-white pb-3 animated slideInDown px-2">
+            </div>
+            <div class="text-white pb-3 animated slideInDown px-2">
                 {!! $homePageSetting->description !!}
-            </span>
+            </div>
 
             <a href="{{ route('contact.index') }}"
                 class="btn btn_color text-dark py-sm-3 px-sm-5 rounded-pill me-3 mt-4 animated slideInLeft">

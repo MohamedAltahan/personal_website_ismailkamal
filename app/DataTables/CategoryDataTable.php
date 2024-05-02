@@ -27,9 +27,7 @@ class CategoryDataTable extends DataTable
                 $deleteBtn = "<a href='" . route('admin.category.destroy', $query->id)  . "'class='btn btn-sm ml-1 my-1 btn-danger delete-item'><i class='fas fa-trash'></i>Delete</a>";
                 return $editBtn . $deleteBtn;
             })
-            ->addColumn('icon', function ($query) {
-                return '<i style="font-size:25px" class="' . $query->icon . '"></i>';
-            })
+
             ->addColumn('status', function ($query) {
                 if ($query->status == 'active') {
                     $button = '<label class="custom-switch mt-2">
@@ -88,7 +86,6 @@ class CategoryDataTable extends DataTable
         return [
 
             Column::make('id'),
-            Column::make('icon'),
             Column::make('name'),
             Column::make('status')->width(60),
             Column::computed('action')
