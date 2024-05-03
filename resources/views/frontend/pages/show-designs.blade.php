@@ -39,11 +39,11 @@
                     </div>
                 </div>
             @empty
-                <div>
-                    <h1 class="text-warning justify-content-center d-flex">
-                        <span>No designs in this section yet.</span>
-                    </h1>
-                </div>
+
+
+                <p class="text-warning justify-content-center d-flex display-6">
+                    No designs in this section yet...
+                </p>
             @endforelse
 
         </div>
