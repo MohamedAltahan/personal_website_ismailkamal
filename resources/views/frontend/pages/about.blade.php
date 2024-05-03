@@ -5,9 +5,9 @@
 @section('content')
     <!-- Contact Start -->
     <div class="container py-5 px-lg-5">
-        <div class="wow fadeInUp" data-wow-delay="0.1s">
+        {{-- <div class="wow fadeInUp" data-wow-delay="0.1s">
             <p class="section-title text-secondary justify-content-center"><span></span>About Us<span></span></p>
-        </div>
+        </div> --}}
         <div class="row justify-content-center">
             <div class="col-lg-10">
                 <div class="wow fadeInUp" data-wow-delay="0.3s">

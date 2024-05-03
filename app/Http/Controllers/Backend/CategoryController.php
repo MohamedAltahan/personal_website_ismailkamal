@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\DataTables\CategoryDataTable;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Design;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -93,10 +94,15 @@ class CategoryController extends Controller
             return response(['status' => 'error', 'message' => 'Can not delete, the item not found.']);
         }
 
-        $subCategoryCount = SubCategory::where('category_id', $id)->count();
-        if ($subCategoryCount > 0) {
-            return response(['status' => 'error', 'message' => 'Can not delete, this category has sub categories.']);
+        $design = Design::where('category_id', $id)->first();
+
+        if (isset($design)) {
+            return response(['status' => 'error', 'message' => 'Can not delete this category, it contains items inside.']);
         }
+        // $subCategoryCount = SubCategory::where('category_id', $id)->count();
+        // if ($subCategoryCount > 0) {
+        //     return response(['status' => 'error', 'message' => 'Can not delete, this category has sub categories.']);
+        // }
 
         $category->delete();
         toastr('Deleted Successfully');
