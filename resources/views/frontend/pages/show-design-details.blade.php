@@ -16,7 +16,7 @@
                 </video>
             @endforeach
             @foreach ($design->images as $image)
-                <img draggable="false" class="col-12 rounded" src="{{ asset('uploads/' . $image->name) }}">
+                <img class="col-12 rounded" src="{{ asset('uploads/' . $image->name) }}">
             @endforeach
             <a href="{{ route('contact.index') }}" class="btn btn_color text-black mt-5 text-dark ">Send us a message</a>
         </div>
