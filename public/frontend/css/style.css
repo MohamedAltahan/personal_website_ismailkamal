@@ -559,7 +559,3 @@ h6,
 .footer .footer-menu a:hover {
     color: var(--secondary);
 }
-
-img {
-    user-drag: none;
-}

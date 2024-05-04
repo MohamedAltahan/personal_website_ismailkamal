@@ -131,6 +131,11 @@
         <!-- Template Javascript -->
         <script src="{{ asset('frontend') }}/js/main.js"></script>
 
+        <script>
+            $('img').on('dragstart', function(event) {
+                event.preventDefault();
+            });
+        </script>
         {{-- toastr --}}
         {{-- <script src="{{ asset('backend/assets/js/toastr.min.js') }}"></script> --}}
 
