@@ -90,7 +90,7 @@
 
     </head>
 
-    <body>
+    <body oncontextmenu="return false">
 
         <div class="container big_container_color p-0" style="min-height: 87vh;">
             <!-- Spinner Start -->

@@ -9,9 +9,10 @@
             <p class="section-title text-secondary justify-content-center">{{ $design->name }}</p>
             {{-- <h1 class="text-center mb-5"></h1> --}}
             @foreach ($design->videos as $video)
-                <video class="col-12 rounded"
-                    poster="{{ $video->video_thumbnail ? asset('uploads/' . $video->video_thumbnail) : null }}" controls>
-                    <source src="{{ asset('uploads/' . $video->name) }}" type="video/mp4">
+                <video class="col-12 rounded" id="video_element"
+                    poster="{{ $video->video_thumbnail ? asset('uploads/' . $video->video_thumbnail) : null }}" controls
+                    controlsList="nodownload">
+                    <source src="{{ asset('uploads/' . $video->name) }}" type="video/mp4" data-src="mov_bbb.ogg">
                 </video>
             @endforeach
             @foreach ($design->images as $image)
@@ -22,3 +23,13 @@
     </div>
     <!-- Service End -->
 @endsection
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            $('#video_element').bind('contextmenu', function() {
+                return false;
+            });
+        });
+    </script>
+@endpush
