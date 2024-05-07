@@ -9,7 +9,7 @@
             <p class="section-title text-secondary justify-content-center">{{ $design->name }}</p>
             {{-- <h1 class="text-center mb-5"></h1> --}}
             @foreach ($design->videos as $video)
-                <video class="col-12 rounded" id="video_element" style="max-height: 90vh;"
+                <video class="col-12 rounded" id="video_element" style="max-height: 85vh;"
                     poster="{{ $video->video_thumbnail ? asset('uploads/' . $video->video_thumbnail) : null }}" controls
                     controlsList="nodownload">
                     <source src="{{ asset('uploads/' . $video->name) }}" type="video/mp4" data-src="mov_bbb.ogg">
