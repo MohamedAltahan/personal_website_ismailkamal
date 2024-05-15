@@ -2,7 +2,8 @@
     <nav class="navbar navbar_color sticky-top shadow-sm navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
         <a href="{{ url('/') }}" class="navbar-brand p-0">
             <img class="mb-3" src="{{ asset('uploads/' . $logo->main_logo) }}" alt="Logo">
-            <h1 class="m-0 text-warning" style="display: inline-block">{{ $setting->site_name }}</h1>
+            <h1 class="m-0 text-warning" style="display: inline-block;font-family: 'Varela Round', sans-serif;">
+                {{ $setting->site_name }}</h1>
         </a>
         <button class="navbar-toggler text_color" type="button" data-bs-toggle="collapse"
             data-bs-target="#navbarCollapse">
