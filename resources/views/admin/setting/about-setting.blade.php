@@ -9,7 +9,7 @@
                     <label for="">
                         <h4>About you</h4>
                     </label>
-                    <textarea class="form-control summernote" name="content">
+                    <textarea class="form-control " name="content">
                         {{ @$content->content }}
                     </textarea>
                 </div>
