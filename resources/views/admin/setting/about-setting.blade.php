@@ -9,9 +9,9 @@
                     <label for="">
                         <h4>About you</h4>
                     </label>
-                    <textarea class="form-control " name="content">
+                    <p class="form-control " name="content">
                         {!! @$content->content !!}
-                    </textarea>
+                    </p>
                 </div>
 
                 <button type="submit" class="btn btn-primary">Update</button>
