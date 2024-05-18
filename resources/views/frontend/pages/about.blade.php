@@ -12,7 +12,7 @@
             <div class="col-lg-10">
                 <div class="wow fadeInUp" data-wow-delay="0.3s">
                     <p class="text-center mb-4">
-                        {!! $about->content !!}
+                        {{ $about->content }}
                     </p>
                 </div>
             </div>
