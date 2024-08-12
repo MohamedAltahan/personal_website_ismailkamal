@@ -33,10 +33,12 @@ class AdminProfileController extends Controller
         $oldImage = $user->image;
         //store the new image
         $newImage = $this->uploadImage($request);
+
         if ($request->hasFile('image')) {
             $profileData['image'] = $newImage;
         }
         User::where('id', Auth::guard('web')->user()->id)->update($profileData);
+
         if ($oldImage && $newImage) {
             Storage::disk('myDisk')->delete($oldImage);
         }
