@@ -12,7 +12,7 @@
 
         <div class="row g-4 portfolio-container">
             @forelse ($designs as $design)
-                <div class="col-lg-4 col-md-6 portfolio-item first wow " data-wow-delay="">
+                <div class="col-lg-4 col-md-6 portfolio-item  wow " data-wow-delay="">
                     <div class="rounded overflow-hidden">
 
                         <div class="position-relative overflow-hidden">
