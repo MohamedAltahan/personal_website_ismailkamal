@@ -10,9 +10,9 @@
             {{-- <h1 class="text-center mb-5">Recently Completed Projects</h1> --}}
         </div>
 
-        <div class="row g-4 portfolio-container">
+        <div class="row g-4">
             @forelse ($designs as $design)
-                <div class="col-lg-4 col-md-6 portfolio-item ">
+                <div class="col-lg-4 col-md-6 first wow fadeInUp" data-wow-delay="">
                     <div class="rounded overflow-hidden">
 
                         <div class="position-relative overflow-hidden">
