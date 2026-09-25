@@ -19,7 +19,7 @@
                 <label class="label" for="password">{{ __('Password') }}</label>
                 <a href="{{ route('admin.password.request') }}" class="text-xs text-primary-600 dark:text-accent-500 hover:underline mb-1.5">{{ __('Forgot password?') }}</a>
             </div>
-            <div class="relative">
+            <div class="relative" dir="ltr">{{-- same direction as the password text, so the eye sits at its end --}}
                 <input id="password" name="password" :type="show ? 'text' : 'password'" required autocomplete="current-password" dir="ltr" class="field h-12 pe-11">
                 <button type="button" @click="show = !show" class="absolute top-1/2 -translate-y-1/2 end-3 text-subtle hover:text-ink">
                     <span x-show="!show"><x-icon name="eye" /></span>
