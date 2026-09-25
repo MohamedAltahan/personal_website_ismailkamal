@@ -11,6 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // Production has this table without a matching row in `migrations`.
+        if (Schema::hasTable('videos')) {
+            return;
+        }
+
         Schema::create('videos', function (Blueprint $table) {
             $table->id();
             $table->text('name');

@@ -1,0 +1,66 @@
+{
+  "_theme-I24ALs52.js": {
+    "file": "assets/theme-I24ALs52.js",
+    "name": "theme"
+  },
+  "node_modules/chart.js/auto/auto.js": {
+    "file": "assets/auto-CPGI3frw.js",
+    "name": "auto",
+    "src": "node_modules/chart.js/auto/auto.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/photoswipe/dist/photoswipe.esm.js": {
+    "file": "assets/photoswipe.esm-BXDdABy_.js",
+    "name": "photoswipe.esm",
+    "src": "node_modules/photoswipe/dist/photoswipe.esm.js",
+    "isDynamicEntry": true
+  },
+  "resources/css/dashboard.css": {
+    "file": "assets/dashboard-Cp22Lk86.css",
+    "src": "resources/css/dashboard.css",
+    "isEntry": true,
+    "name": "dashboard",
+    "names": [
+      "dashboard.css"
+    ]
+  },
+  "resources/css/site.css": {
+    "file": "assets/site-xcPWXE4o.css",
+    "src": "resources/css/site.css",
+    "isEntry": true,
+    "name": "site",
+    "names": [
+      "site.css"
+    ]
+  },
+  "resources/js/builder/index.js": {
+    "file": "assets/index-DZwZMPWb.js",
+    "name": "index",
+    "src": "resources/js/builder/index.js",
+    "isEntry": true
+  },
+  "resources/js/dashboard.js": {
+    "file": "assets/dashboard-DJA1e_Pl.js",
+    "name": "dashboard",
+    "src": "resources/js/dashboard.js",
+    "isEntry": true,
+    "imports": [
+      "_theme-I24ALs52.js"
+    ],
+    "dynamicImports": [
+      "node_modules/chart.js/auto/auto.js"
+    ]
+  },
+  "resources/js/site.js": {
+    "file": "assets/site-zWhR8Mh8.js",
+    "name": "site",
+    "src": "resources/js/site.js",
+    "isEntry": true,
+    "imports": [
+      "_theme-I24ALs52.js"
+    ],
+    "dynamicImports": [
+      "node_modules/photoswipe/dist/photoswipe.esm.js"
+    ]
+  }
+}

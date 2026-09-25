@@ -1,74 +1,92 @@
 <?php
 
-use App\Http\Controllers\Backend\AboutController;
-use App\Http\Controllers\Backend\AdminController;
-use App\Http\Controllers\Backend\AdminProfileController;
-use App\Http\Controllers\Backend\CategoryController;
-use App\Http\Controllers\Backend\DesignController;
-use App\Http\Controllers\Backend\SettingController;
-use App\Http\Controllers\Backend\SubCategoryController;
-use App\Http\Controllers\Backend\ShowDesignController;
-use App\Http\Controllers\Backend\EmailInboxController;
-use App\Http\Controllers\Backend\HomePageSettingController;
-use App\Http\Controllers\Backend\SocialController;
-use App\Http\Controllers\Backend\WebsiteColorController;
+use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\BuilderController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\MediaController;
+use App\Http\Controllers\Admin\MessageController;
+use App\Http\Controllers\Admin\PageController;
+use App\Http\Controllers\Admin\PasswordResetController;
+use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\ProjectController;
+use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\SocialController;
 use Illuminate\Support\Facades\Route;
 
-Route::group(
-    ['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'],
-    function () {
-        Route::get('dashboard', [AdminController::class, 'dashboard'])
-            ->name('dashboard');
+Route::prefix('admin')->name('admin.')->group(function () {
 
-        //profile routes _________________________________________________________________________________________
-        Route::get('profile', [AdminProfileController::class, 'index'])->name('profile');
-        Route::post('profile/update', [AdminProfileController::class, 'profileUpdate'])->name('profile.update');
-        Route::post('profile/update/password', [AdminProfileController::class, 'passwordUpdate'])->name('password.update');
+    Route::middleware('guest')->group(function () {
+        Route::get('login', [AuthController::class, 'create'])->name('login');
+        Route::post('login', [AuthController::class, 'store'])->middleware('throttle:6,1');
+        Route::get('forgot-password', [PasswordResetController::class, 'request'])->name('password.request');
+        Route::post('forgot-password', [PasswordResetController::class, 'email'])->middleware('throttle:4,1')->name('password.email');
+        Route::get('reset-password/{token}', [PasswordResetController::class, 'reset'])->name('password.reset');
+        Route::post('reset-password', [PasswordResetController::class, 'update'])->name('password.store');
+    });
 
-        //settigs _________________________________________________________________________________________
-        Route::get('settings', [SettingController::class, 'index'])->name('settings.index');
-        Route::put('logo-setting-update', [SettingController::class, 'logoSettingUpdate'])->name('logo-setting-update.update');
-        Route::put('general-settnig-update', [SettingController::class, 'generalSettingUpdate'])->name('general-setting-update.index');
+    Route::post('locale/{locale}', function (string $locale) {
+        abort_unless(array_key_exists($locale, locales()), 404);
+        session(['admin_locale' => $locale]);
+        auth()->user()?->update(['locale' => $locale]);
 
-        //category routes__________________________________________________________________________________________
-        Route::put('category/change-status', [CategoryController::class, 'changeStatus'])->name('category.change-status');
-        Route::resource('category', CategoryController::class);
+        return back();
+    })->name('locale');
 
-        //sub category routes_______________________________________________________________________________________
-        Route::put('sub-category/change-status', [SubCategoryController::class, 'changeStatus'])->name('sub-category.change-status');
-        Route::resource('sub-category', SubCategoryController::class);
+    Route::middleware('auth')->group(function () {
+        Route::post('logout', [AuthController::class, 'destroy'])->name('logout');
 
-        // update About page______________________________________________________________________________
-        Route::put('about/update', [AboutController::class, 'update'])->name('about.update');
+        Route::get('/', DashboardController::class)->name('dashboard');
 
-        // website color______________________________________________________________________________
-        Route::put('website-color', [WebsiteColorController::class, 'update'])->name('website-color.update');
+        // Projects
+        Route::post('projects/reorder', [ProjectController::class, 'reorder'])->name('projects.reorder');
+        Route::patch('projects/{project}/toggle/{field}', [ProjectController::class, 'toggle'])->whereIn('field', ['status', 'is_featured'])->name('projects.toggle');
+        Route::post('projects/{project}/duplicate', [ProjectController::class, 'duplicate'])->name('projects.duplicate');
+        Route::resource('projects', ProjectController::class)->except('show');
 
-        // update home page______________________________________________________________________________
-        Route::put('banner-at-home/change-status', [HomePageSettingController::class, 'changeStatus'])->name('banner-at-home.change-status');
-        Route::put('home-page-setting', [HomePageSettingController::class, 'update'])->name('home-page-setting.update');
-        Route::put('media-on-home-page', [HomePageSettingController::class, 'mediaOnHomePageUpdate'])->name('media-on-home-page.update');
+        // Pages
+        Route::resource('pages', PageController::class)->except('show');
 
-        //desgin _____________________________________________________________________________
-        Route::put('update-video-thumbnail/{id}', [DesignController::class, 'updateVideoThumbnail'])->name('update-video-thumbnail');
-        Route::delete('design/delete-design-video', [DesignController::class, 'deleteDesignVideo'])->name('design.delete-design-video');
-        Route::delete('design/delete-design-image', [DesignController::class, 'deleteDesignImage'])->name('design.delete-design-image');
-        Route::delete('design/delete-video-thumbnail', [DesignController::class, 'deleteVideoThumbnail'])->name('design.delete-video-thumbnail');
-        Route::put('design/change-status', [DesignController::class, 'changeStatus'])->name('design.change-status');
-        Route::resource('design', DesignController::class);
+        // Builder live preview
+        Route::post('builder/preview', [BuilderController::class, 'preview'])->name('builder.preview');
 
-        //show desgins page____________________________________________________________________________________
-        Route::get('show-designs', [ShowDesignController::class, 'index'])->name('show-designs.index');
+        // Categories
+        Route::post('categories/reorder', [CategoryController::class, 'reorder'])->name('categories.reorder');
+        Route::patch('categories/{category}/toggle', [CategoryController::class, 'toggle'])->name('categories.toggle');
+        Route::resource('categories', CategoryController::class)->only(['index', 'store', 'update', 'destroy']);
+        Route::post('categories/{category}/sub', [CategoryController::class, 'storeSub'])->name('categories.sub.store');
+        Route::put('sub-categories/{subCategory}', [CategoryController::class, 'updateSub'])->name('categories.sub.update');
+        Route::delete('sub-categories/{subCategory}', [CategoryController::class, 'destroySub'])->name('categories.sub.destroy');
 
-        //sub category routes _____________________________________________________________________________________
-        Route::get('get-sub-categories', [SubCategoryController::class, 'getSubCategories'])->name('get-sub-categories');
+        // Media library
+        Route::get('media', [MediaController::class, 'index'])->name('media.index');
+        Route::get('media/list', [MediaController::class, 'list'])->name('media.list');
+        Route::post('media/upload', [MediaController::class, 'upload'])->name('media.upload');
+        Route::post('media/embed', [MediaController::class, 'embed'])->name('media.embed');
+        Route::post('media/regenerate', [MediaController::class, 'regenerate'])->name('media.regenerate');
+        Route::post('media/bulk-delete', [MediaController::class, 'bulkDestroy'])->name('media.bulk-destroy');
+        Route::put('media/{media}', [MediaController::class, 'update'])->name('media.update');
+        Route::post('media/{media}/poster', [MediaController::class, 'poster'])->name('media.poster');
+        Route::delete('media/{media}', [MediaController::class, 'destroy'])->name('media.destroy');
 
-        //email inbox_____________________________________________________________________________________________
-        Route::get('email-inbox', [EmailInboxController::class, 'index'])->name('get-emails.index');
-        Route::get('email-inbox/show/{id}', [EmailInboxController::class, 'show'])->name('get-emails.show');
+        // Messages
+        Route::get('messages', [MessageController::class, 'index'])->name('messages.index');
+        Route::get('messages/{message}', [MessageController::class, 'show'])->name('messages.show');
+        Route::patch('messages/{message}/unread', [MessageController::class, 'unread'])->name('messages.unread');
+        Route::delete('messages/{message}', [MessageController::class, 'destroy'])->name('messages.destroy');
 
-        //footer social buttons---------------------------
-        Route::put('socials/change-status', [SocialController::class, 'changeStatus'])->name('socials.change-status');
-        Route::resource('socials', SocialController::class);
-    }
-);
+        // Social links
+        Route::post('socials/reorder', [SocialController::class, 'reorder'])->name('socials.reorder');
+        Route::patch('socials/{social}/toggle', [SocialController::class, 'toggle'])->name('socials.toggle');
+        Route::resource('socials', SocialController::class)->only(['index', 'store', 'update', 'destroy']);
+
+        // Settings
+        Route::get('settings/{tab?}', [SettingController::class, 'index'])->name('settings.index');
+        Route::put('settings/{tab}', [SettingController::class, 'update'])->name('settings.update');
+
+        // Profile
+        Route::get('profile', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::put('profile', [ProfileController::class, 'update'])->name('profile.update');
+        Route::put('profile/password', [ProfileController::class, 'password'])->name('profile.password');
+    });
+});

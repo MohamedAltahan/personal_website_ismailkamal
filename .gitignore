@@ -1,6 +1,6 @@
 /.phpunit.cache
+/.phpunit.result.cache
 /node_modules
-/public/build
 /public/hot
 /public/storage
 /storage/*.key
@@ -16,4 +16,15 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
-/config/database.php
+/.claude
+
+# Built front-end assets ARE committed (the server has no Node): /public/build is tracked.
+
+# Media uploaded from the dashboard live only on the server (a few legacy files stay tracked).
+/public/uploads/*
+
+# Local database dumps and archives must never be pushed.
+/database/backups/
+*.zip
+*.sql
+*.sql.gz

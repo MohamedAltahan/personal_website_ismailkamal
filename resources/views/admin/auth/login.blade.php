@@ -1,121 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.guest')
 
-    <head>
-        <meta charset="UTF-8">
-        <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-        <title>Login &mdash; Stisla</title>
+@section('title', __('Sign in'))
 
-        <!-- General CSS Files -->
-        <link rel="stylesheet" href="{{ asset('backend/assets/modules/bootstrap/css/bootstrap.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('backend/assets/modules/fontawesome/css/all.min.css') }}">
+@section('content')
+    <h2 class="text-2xl font-bold mb-1.5">{{ __('Welcome back') }} 👋</h2>
+    <p class="text-sm text-muted mb-8">{{ __('Sign in to manage your portfolio.') }}</p>
 
-        <!-- CSS Libraries -->
-        <link rel="stylesheet" href="{{ asset('backend/assets/modules/bootstrap-social/bootstrap-social.css') }}">
-
-        <!-- Template CSS -->
-        <link rel="stylesheet" href="{{ asset('backend/assets/css/style.css') }}">
-        <link rel="stylesheet" href="{{ asset('backend/assets/css/components.css') }}">
-        <!-- Start GA -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-
-            function gtag() {
-                dataLayer.push(arguments);
-            }
-            gtag('js', new Date());
-
-            gtag('config', 'UA-94034622-3');
-        </script>
-        <!-- /END GA -->
-    </head>
-
-    <body>
-        <div id="app">
-            <section class="section">
-                <div class="container mt-5">
-                    <div class="row">
-                        <div
-                            class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
-                            <div class="login-brand">
-                                <img src="{{ asset('uploads/' . @$logoSetting->icon) }}" alt="logo" width="60"
-                                    class="">
-                            </div>
-
-                            <div class="card card-primary">
-                                <div class="card-header">
-                                    <h4>Login</h4>
-                                </div>
-
-                                <div class="card-body">
-                                    <form method="POST" action="{{ route('admin.login') }}" class="needs-validation"
-                                        novalidate="">
-                                        @csrf
-
-
-                                        <!-- Email Address -->
-                                        <div class="form-group">
-
-                                            <x-form.input label="Email" id="email" type="email" name="email"
-                                                lable='email' required autofocus />
-                                        </div>
-                                        <!-- password Address -->
-                                        <div class="form-group">
-                                            <div class="d-block">
-                                                <div class="float-right">
-                                                    <a href="{{ route('admin.password.request') }}" class="text-small">
-                                                        Forgot Password?
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <x-form.input id="password" type="password" name="password"
-                                                label="Password" lable='password' required />
-                                        </div>
-
-                                        <div class="form-group">
-                                            <div class="custom-control custom-checkbox">
-                                                <input id="remember_me" type="checkbox" name="remember" tabindex="3">
-                                                <label for="remember_me">Remember
-                                                    Me</label>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <button type="submit" class="btn btn-primary btn-lg btn-block"
-                                                tabindex="4">
-                                                Login
-                                            </button>
-                                        </div>
-                                    </form>
-
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-        </div>
-        </section>
+    <form method="POST" action="{{ route('admin.login') }}" class="space-y-5" x-data="{ show: false }">
+        @csrf
+        <div>
+            <label class="label" for="email">{{ __('Email') }}</label>
+            <input id="email" name="email" type="email" value="{{ old('email') }}" required autofocus autocomplete="username" dir="ltr" class="field h-12">
+            @error('email')<p class="mt-1.5 text-xs text-danger">{{ $message }}</p>@enderror
         </div>
 
-        <!-- General JS Scripts -->
-        <script src="{{ asset('backend/assets/modules/jquery.min.js') }}"></script>
-        <script src="{{ asset('backend/assets/modules/popper.js') }}"></script>
-        <script src="{{ asset('backend/assets/modules/tooltip.js') }}"></script>
-        <script src="{{ asset('backend/assets/modules/bootstrap/js/bootstrap.min.js') }}"></script>
-        <script src="{{ asset('backend/assets/modules/nicescroll/jquery.nicescroll.min.js') }}"></script>
-        <script src="{{ asset('backend/assets/modules/moment.min.js') }}"></script>
-        <script src="{{ asset('backend/assets/js/stisla.js') }}"></script>
+        <div>
+            <div class="flex items-center justify-between">
+                <label class="label" for="password">{{ __('Password') }}</label>
+                <a href="{{ route('admin.password.request') }}" class="text-xs text-primary-600 dark:text-accent-500 hover:underline mb-1.5">{{ __('Forgot password?') }}</a>
+            </div>
+            <div class="relative">
+                <input id="password" name="password" :type="show ? 'text' : 'password'" required autocomplete="current-password" dir="ltr" class="field h-12 pe-11">
+                <button type="button" @click="show = !show" class="absolute top-1/2 -translate-y-1/2 end-3 text-subtle hover:text-ink">
+                    <span x-show="!show"><x-icon name="eye" /></span>
+                    <span x-show="show" x-cloak><x-icon name="eye-off" /></span>
+                </button>
+            </div>
+        </div>
 
-        <!-- JS Libraies -->
+        <label class="flex items-center gap-2.5 text-sm text-muted">
+            <input type="checkbox" name="remember" value="1"> {{ __('Remember me') }}
+        </label>
 
-        <!-- Page Specific JS File -->
-
-        <!-- Template JS File -->
-        <script src="{{ asset('backend/assets/js/scripts.js') }}"></script>
-        <script src="{{ asset('backend/assets/js/custom.js') }}"></script>
-    </body>
-
-</html>
+        <button type="submit" class="btn-primary w-full h-12 text-base">{{ __('Sign in') }}</button>
+    </form>
+@endsection

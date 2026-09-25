@@ -1,66 +1,91 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Ismail Kamal — Portfolio
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Portfolio website and dashboard for a motion & graphic designer.
 
-## About Laravel
+- **Stack:** Laravel 12 · Tailwind CSS 4 · Alpine.js · Vite
+- **Languages:** Arabic (RTL) and English
+- **Themes:** light, dark and system
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Features
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- **Public site (minimal editorial):**
+  - `/{ar|en}` URLs. Visitors are sent to their browser language automatically, and the choice is remembered in a cookie.
+  - Pages: Home, Work (with category filters), project pages, About, Contact and custom pages.
+  - Lightbox, video player, YouTube/Vimeo embeds, scroll animations and a custom cursor.
+  - SEO: `sitemap.xml`, `hreflang`, JSON-LD and Open Graph tags.
+  - Old URLs (`/design-details/{id}`, `/category/{id}`) redirect permanently to the new ones.
+- **Dashboard** (`/admin`, same identity as the Alam dashboard):
+  - Projects, categories, pages, media library, messages, social links, settings and profile.
+- **Page builder:**
+  - Projects and pages are built from blocks: hero, heading, text, image, gallery (grid / masonry / slider / stack), video, embed, media + text, columns, before/after, quote, credits, call to action, projects grid, spacer.
+  - Every block has content and style settings, with Arabic and English content.
+  - Live preview on desktop, tablet or mobile.
+  - Undo and redo, local draft recovery, and drag & drop ordering.
+- **Media pipeline:**
+  - Chunked uploads, so large videos work regardless of PHP limits.
+  - Video posters are captured automatically.
+  - Responsive WebP/AVIF/JPG renditions at the quality set in *Settings → Images & media*.
+  - Optional watermark.
+  - One-click re-processing of all images.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Local development
 
-## Learning Laravel
+Run each step in order:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+```bash
+composer install
+npm install
+cp .env.example .env
+php artisan key:generate
+php artisan migrate
+php artisan portfolio:migrate-legacy
+npm run dev
+php artisan serve
+```
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+`portfolio:migrate-legacy` is only needed once, on databases that come from the old site.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+A local-only admin account can be created with `php artisan db:seed --class=LocalAdminSeeder`. The credentials are in that seeder file. It does nothing in production.
 
-## Laravel Sponsors
+Run the tests with `php artisan test`.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+## Deploying the upgrade to production
 
-### Premium Partners
+1. **Back up** the database and the `public/uploads` folder.
+2. **Upload** the new code, keeping `public/uploads`.
+3. **Install dependencies:** `composer install --no-dev --optimize-autoloader`. The server needs PHP ≥ 8.2 with the `gd` extension (WebP/AVIF support) and `fileinfo`.
+4. **Build assets:** run `npm ci && npm run build`, or build locally and upload `public/build`.
+5. **Update `.env`:** these keys are new or changed:
+   - `APP_LOCALE=ar`
+   - `CACHE_STORE=file`
+   - `QUEUE_CONNECTION=sync`
+   - the `MAIL_*` settings, if you want email notifications for contact messages
+6. **Migrate:** `php artisan migrate --force`. The migrations are additive: legacy tables and files are kept.
+7. **Convert the old content:** first run `php artisan portfolio:migrate-legacy --dry-run`, then `php artisan portfolio:migrate-legacy`. It is safe to re-run; nothing is duplicated.
+8. **Cache:** `php artisan optimize`.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+After the new site is confirmed, the legacy tables (`images`, `videos`, `abouts`, `home_page_settings`, `logo_settings`, `website_colors`, `settings`) are no longer read. They can be dropped later.
 
-## Contributing
+### Useful commands
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+| Command | What it does |
+|---|---|
+| `php artisan media:regenerate` | Rebuild every image with the current media settings. |
+| `php artisan media:regenerate --missing` | Only images that have no renditions yet. |
+| `php artisan portfolio:migrate-legacy --force` | Rebuild projects and pages from the legacy tables. This overwrites edits made in the builder. |
 
-## Code of Conduct
+## Structure
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- `app/Support/Blocks/BlockRegistry.php` — block types, their defaults, and server-side sanitising.
+- `resources/views/blocks/*` — how each block renders on the site. The builder preview uses the same views.
+- `resources/views/admin/builder/*` — the editor and one inspector per block type.
+- `resources/js/builder/index.js` — editor state, history and live preview.
+- `app/Services/MediaService.php` — uploads, renditions, watermark and embeds.
+- `config/site.php` — locales, fonts and default values for every setting.
+- `lang/ar.json` — Arabic interface strings. The keys are the English text.
 
-## Security Vulnerabilities
+### Adding a new block type
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+1. Define it in `BlockRegistry::types()`.
+2. Create `resources/views/blocks/{type}.blade.php`.
+3. Create `resources/views/admin/builder/inspectors/{type}.blade.php`.
