@@ -12,6 +12,9 @@ const root = document.documentElement;
 const osReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches && root.dataset.reducedMotion !== 'ignore';
 const motionOk = !osReduced && root.dataset.animations !== 'off';
 if (!motionOk) root.classList.add('no-motion');
+// Only now may [data-reveal] content start hidden (see site.css) — if this script never
+// loads, everything stays visible.
+root.classList.add('reveal-ready');
 
 Alpine.plugin([collapse, focus]);
 Alpine.data('themeToggle', themeToggle);

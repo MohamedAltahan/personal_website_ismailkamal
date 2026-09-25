@@ -16,7 +16,7 @@
     "isDynamicEntry": true
   },
   "resources/css/dashboard.css": {
-    "file": "assets/dashboard-Cp22Lk86.css",
+    "file": "assets/dashboard-6GCjVK7c.css",
     "src": "resources/css/dashboard.css",
     "isEntry": true,
     "name": "dashboard",
@@ -25,7 +25,7 @@
     ]
   },
   "resources/css/site.css": {
-    "file": "assets/site-xcPWXE4o.css",
+    "file": "assets/site-yQ62Nk-4.css",
     "src": "resources/css/site.css",
     "isEntry": true,
     "name": "site",
@@ -52,7 +52,7 @@
     ]
   },
   "resources/js/site.js": {
-    "file": "assets/site-zWhR8Mh8.js",
+    "file": "assets/site-hC5SN7in.js",
     "name": "site",
     "src": "resources/js/site.js",
     "isEntry": true,

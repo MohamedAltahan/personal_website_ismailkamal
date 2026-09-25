@@ -211,23 +211,24 @@
     padding-bottom: 0.08em;
 }
 
-/* Scroll reveal (see site.js) */
-[data-reveal] {
+/* Scroll reveal (see site.js). Content is only hidden once site.js has loaded
+   (.reveal-ready), so it stays visible if scripts fail to load. */
+.reveal-ready [data-reveal] {
     opacity: 0;
     transform: translateY(28px);
     transition: opacity 0.9s var(--ease-out-expo), transform 1.1s var(--ease-out-expo);
     transition-delay: var(--reveal-delay, 0s);
 }
 
-[data-reveal='fade'] {
+.reveal-ready [data-reveal='fade'] {
     transform: none;
 }
 
-[data-reveal='zoom'] {
+.reveal-ready [data-reveal='zoom'] {
     transform: scale(0.96);
 }
 
-[data-reveal].is-visible {
+.reveal-ready [data-reveal].is-visible {
     opacity: 1;
     transform: none;
 }
